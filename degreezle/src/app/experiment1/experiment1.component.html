@@ -1,0 +1,24 @@
+<div class="game">
+
+  <div class="film poster">
+    <img src="/assets/movie1.jpg">
+  </div>
+  <div class="dots">
+    <img src="/assets/dots.svg">
+  </div>
+  <div [class.cast]="chosen">
+    <app-selector (chosen)="chosen=true;" [options]="castMembers"></app-selector>
+  </div>
+  <div *ngIf="chosen" class="dots">
+    <img src="/assets/dots.svg">
+  </div>
+  <div *ngIf="chosen" class="film">
+    <app-selector [options]="movies"></app-selector>
+  </div>
+  <div class="dots">
+    <img src="/assets/dots.svg">
+  </div>
+  <div class="film poster">
+    <img src="/assets/movie2.jpg">
+  </div>
+</div>

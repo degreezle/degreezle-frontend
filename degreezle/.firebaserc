@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "degreezle-test": {
+      "hosting": {
+        "degreezle": [
+          "degreezle-test"
+        ]
+      }
+    }
+  }
+}

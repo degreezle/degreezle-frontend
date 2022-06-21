@@ -1,0 +1,21 @@
+<div [class.typing]="typing" [class.poster]="myControl.value" (click)="typing=true">
+  <form *ngIf="typing && !hasChosen()" class="form">
+    <mat-form-field class="full-width">
+      <mat-label>Select one</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          <img src="assets/{{option.img_path}}"  width="25px">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <img  *ngIf="!typing && !hasChosen()" src="/assets/question-actor.svg" width="40px">
+  <img  *ngIf="hasChosen()" src="assets/{{myControl.value.img_path}}">
+</div>
