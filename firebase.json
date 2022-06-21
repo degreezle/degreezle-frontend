@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "degreezle",
-      "public": "dist/",
+      "public": "dist/degreezle",
       "ignore": [
         "**/.*"
       ],
