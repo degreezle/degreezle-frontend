@@ -2,14 +2,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { Selectable } from 'src/models';
+import { CastMember } from '../../models';
+
 
 @Component({
-  selector: 'app-selector',
-  templateUrl: './selector.component.html',
-  styleUrls: ['./selector.component.scss']
+  selector: 'app-cast-member-selector',
+  templateUrl: './cast-member-selector.component.html',
+  styleUrls: ['./cast-member-selector.component.scss']
 })
-export class SelectorComponent<T extends Selectable> implements OnInit {
+export class CastMemberSelectorComponent implements OnInit {
 
   @Output() chosen: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -17,8 +18,8 @@ export class SelectorComponent<T extends Selectable> implements OnInit {
 
   myControl = new FormControl(null);
 
-  @Input() options: T[] = [];
-  filteredOptions: Observable<T[]> | undefined;
+  @Input() options: CastMember[] = [];
+  filteredOptions: Observable<CastMember[]> | undefined;
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -29,7 +30,7 @@ export class SelectorComponent<T extends Selectable> implements OnInit {
     this.myControl.valueChanges.subscribe(v => { if (this.hasChosen()) this.chosen.emit(); });
   }
 
-  private _filter(value: string): T[] {
+  private _filter(value: string): CastMember[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
@@ -39,7 +40,7 @@ export class SelectorComponent<T extends Selectable> implements OnInit {
     return this.myControl.value && typeof this.myControl.value !== 'string' && 'name' in this.myControl.value;
   }
 
-  displayFn(option: T): string {
+  displayFn(option: CastMember): string {
     return option && option.name ? option.name : '';
   }
 }

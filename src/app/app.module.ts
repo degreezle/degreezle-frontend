@@ -12,7 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { Experiment1Component } from './experiment1/experiment1.component';
 import { Experiment2Component } from './experiment2/experiment2.component';
 import { Experiment3Component } from './experiment3/experiment3.component';
-import { SelectorComponent } from './experiment1/selector/selector.component';
+import { CastMemberSelectorComponent } from './cast-member-selector/cast-member-selector.component';
+import { MovieSelectorComponent } from './movie-selector/movie-selector.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SelectorComponent } from './experiment1/selector/selector.component';
     Experiment1Component,
     Experiment2Component,
     Experiment3Component,
-    SelectorComponent
+    CastMemberSelectorComponent,
+    MovieSelectorComponent
   ],
   imports: [
     BrowserModule,

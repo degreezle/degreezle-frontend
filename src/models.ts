@@ -1,17 +1,18 @@
 /**
- * Year level model
+ * Cast member model
  */
-export interface Selectable {
+export interface CastMember {
   img_path: string;
   id: number;
   name: string;
 }
 
 /**
- * Year level model
+ * Movie model
  */
-export interface CastMember extends Selectable {
+export interface Movie {
   img_path: string;
   id: number;
-  name: string;
+  title: string;
 }
+
