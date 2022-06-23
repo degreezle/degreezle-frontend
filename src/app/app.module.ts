@@ -15,6 +15,7 @@ import { Experiment2Component } from './experiment2/experiment2.component';
 import { Experiment3Component } from './experiment3/experiment3.component';
 import { CastMemberSelectorComponent } from './cast-member-selector/cast-member-selector.component';
 import { MovieSelectorComponent } from './movie-selector/movie-selector.component';
+import { Experiment4Component } from './experiment4/experiment4.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MovieSelectorComponent } from './movie-selector/movie-selector.componen
     Experiment2Component,
     Experiment3Component,
     CastMemberSelectorComponent,
-    MovieSelectorComponent
+    MovieSelectorComponent,
+    Experiment4Component
   ],
   imports: [
     BrowserModule,

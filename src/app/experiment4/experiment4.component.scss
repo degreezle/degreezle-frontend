@@ -86,27 +86,19 @@
   }
 }
 
-.swiper.cards {
-  width: 140px !important;
-  height: 200px !important;
-  padding: 20px !important;
-
-  img {
-    width: 140px;
-  }
-
-  .cast-name {
-    position: fixed;
-    margin-top: 250px;
-  }
-}
-
-.swiper-slide.cards {
+.list {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px !important;
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
+  width: 100%;
+  background-color: #f1f1f1;
+  gap: 20px;
+  flex-wrap: wrap;
+  flex-grow: 4;
+
+  .item {
+    width: 50px;
+
+    img {
+      width: 50px;
+    }
+  }
 }

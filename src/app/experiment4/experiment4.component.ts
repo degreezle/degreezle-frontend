@@ -2,19 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Movie, CastMember } from '../../models';
 import { castMembers, movies } from '../../data';
 
-// import Swiper core and required modules
-import SwiperCore, { EffectCards } from "swiper";
-
-// install Swiper modules
-SwiperCore.use([EffectCards]);
-
 @Component({
-  selector: 'app-experiment3',
-  templateUrl: './experiment3.component.html',
-  styleUrls: ['./experiment3.component.scss'],
+  selector: 'app-experiment4',
+  templateUrl: './experiment4.component.html',
+  styleUrls: ['./experiment4.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class Experiment3Component implements OnInit {
+export class Experiment4Component implements OnInit {
 
   chosen = false;
 
