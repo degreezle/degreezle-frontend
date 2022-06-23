@@ -22,6 +22,21 @@ export class Experiment3Component implements OnInit {
 
   movies: Movie[] = movies;
 
+  taps = 0;
+
+
+  onSlideChange() {
+    this.taps = 0;
+  }
+
+  tapped() {
+    this.taps += 1;
+  }
+
+  confirm() {
+    this.taps = 0;
+  }
+
   ngOnInit(): void {
 
   }
