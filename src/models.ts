@@ -2,7 +2,7 @@
  * Cast member model
  */
 export interface CastMember {
-  img_path: string;
+  profile_path: string;
   id: number;
   name: string;
 }
@@ -11,8 +11,17 @@ export interface CastMember {
  * Movie model
  */
 export interface Movie {
-  img_path: string;
+  poster_path: string;
   id: number;
   title: string;
+}
+
+/**
+ * StartPuzzle model
+ */
+ export interface StartPuzzle {
+  id: number;
+  start_movie: Movie;
+  end_movie: Movie;
 }
 

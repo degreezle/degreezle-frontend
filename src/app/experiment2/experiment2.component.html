@@ -20,7 +20,7 @@
   </div>
   <div>
     <swiper [effect]="'cards'" [grabCursor]="true" class="mySwiper">
-      <ng-template swiperSlide *ngFor="let member of castMembers"><img src="https://image.tmdb.org/t/p/w500{{member.img_path}}"><div class="cast-name">{{member.name}}</div></ng-template>
+      <ng-template swiperSlide *ngFor="let member of castMembers"><img src="https://image.tmdb.org/t/p/w500{{member.profile_path}}"><div class="cast-name">{{member.name}}</div></ng-template>
     </swiper>
   </div>
   <div *ngIf="chosen" class="dots">

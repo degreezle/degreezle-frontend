@@ -10,7 +10,7 @@
              [matAutocomplete]="auto">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          <img src="assets/{{option.img_path}}"  width="25px">
+          <img src="assets/{{option.poster_path}}"  width="25px">
           {{option.title}}
         </mat-option>
       </mat-autocomplete>

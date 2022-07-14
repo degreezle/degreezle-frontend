@@ -21,7 +21,7 @@
   <div>
     <swiper [effect]="'cards'" [grabCursor]="true" class="cards" (slideChange)="onSlideChange()" (click)="tapped()">
       <ng-template swiperSlide class="cards" *ngFor="let member of castMembers">
-        <img [class.tapped]="taps" src="https://image.tmdb.org/t/p/w500{{member.img_path}}">
+        <img [class.tapped]="taps" src="https://image.tmdb.org/t/p/w500{{member.profile_path}}">
         <div class="cast-name">{{member.name}}</div>
         <div *ngIf="taps" class="confirm" (click)="confirm()">✓</div>
       </ng-template>

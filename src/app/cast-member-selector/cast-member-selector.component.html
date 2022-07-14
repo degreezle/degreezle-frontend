@@ -11,7 +11,7 @@
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           <div class="option">
-            <div><img *ngIf="option.img_path !== 'None'" src="https://image.tmdb.org/t/p/w500{{option.img_path}}" class="cast-pic"></div>
+            <div><img *ngIf="option.profile_path !== 'None'" src="https://image.tmdb.org/t/p/w500{{option.profile_path}}" class="cast-pic"></div>
             <div class="cast-name">{{option.name}}</div>
           </div>
         </mat-option>
@@ -19,5 +19,5 @@
     </mat-form-field>
   </form>
   <img  *ngIf="!typing && !hasChosen()" src="/assets/question-actor.svg" width="40px">
-  <img  *ngIf="hasChosen()" src="https://image.tmdb.org/t/p/w500{{myControl.value.img_path}}" width="150px">
+  <img  *ngIf="hasChosen()" src="https://image.tmdb.org/t/p/w500{{myControl.value.profile_path}}" width="150px">
 </div>
