@@ -1,6 +1,6 @@
 const prefix = '/api/'
 
-export const HOST = 'http://api.degreezle.joopeeds.com'
+export const HOST = 'https://api-degreezle.joopeeds.com'
 
 export const ENDPOINTS = {
     init: prefix + 'puzzle/init/', 
