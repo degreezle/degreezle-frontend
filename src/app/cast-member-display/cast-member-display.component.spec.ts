@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Experiment4Component } from './experiment4.component';
+import { CastMemberDisplayComponent } from './cast-member-display.component';
 
-describe('Experiment4Component', () => {
-  let component: Experiment4Component;
-  let fixture: ComponentFixture<Experiment4Component>;
+describe('CastMemberDisplayComponent', () => {
+  let component: CastMemberDisplayComponent;
+  let fixture: ComponentFixture<CastMemberDisplayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Experiment4Component ]
+      declarations: [ CastMemberDisplayComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Experiment4Component);
+    fixture = TestBed.createComponent(CastMemberDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

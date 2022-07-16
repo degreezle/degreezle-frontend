@@ -25,3 +25,13 @@ export interface Movie {
   end_movie: Movie;
 }
 
+/**
+ * SolutionResponse model
+ */
+ export interface SolutionResponse {
+  puzzle: number;
+  token: string;
+  solution: (Movie | CastMember)[];
+  count?: number;
+}
+

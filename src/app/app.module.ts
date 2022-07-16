@@ -11,24 +11,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SwiperModule } from 'swiper/angular';
 import { HttpClientModule } from '@angular/common/http';
-import { Experiment1Component } from './experiment1/experiment1.component';
-import { Experiment2Component } from './experiment2/experiment2.component';
-import { Experiment3Component } from './experiment3/experiment3.component';
 import { CastMemberSelectorComponent } from './cast-member-selector/cast-member-selector.component';
 import { MovieSelectorComponent } from './movie-selector/movie-selector.component';
-import { Experiment4Component } from './experiment4/experiment4.component';
 import { PuzzleComponent } from './puzzle/puzzle.component';
+import { PuzzlePageComponent } from './puzzle-page/puzzle-page.component';
+import { MovieDisplayComponent } from './movie-display/movie-display.component';
+import { CastMemberDisplayComponent } from './cast-member-display/cast-member-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    Experiment1Component,
-    Experiment2Component,
-    Experiment3Component,
     CastMemberSelectorComponent,
     MovieSelectorComponent,
-    Experiment4Component,
     PuzzleComponent,
+    PuzzlePageComponent,
+    MovieDisplayComponent,
+    CastMemberDisplayComponent,
   ],
   imports: [
     BrowserModule,

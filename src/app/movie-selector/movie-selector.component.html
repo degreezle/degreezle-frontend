@@ -18,8 +18,6 @@
   </form>
   
 </div>
-<div (click)="typing=true" class="who" *ngIf="!typing && !hasChosen()">?</div>
+<div (click)="typing=true" class="who" *ngIf="!typing && !hasChosen()">????</div>
 
-<div *ngIf="hasChosen()" class="film poster">
-  <img src="https://image.tmdb.org/t/p/w500{{myControl.value.poster_path}}">
-</div>
+<app-movie-display *ngIf="hasChosen()" [item]="myControl.value"></app-movie-display>

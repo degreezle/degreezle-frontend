@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { ENDPOINTS, HOST } from 'src/constants';
-import { CastMember, Movie, StartPuzzle } from 'src/models';
+import { CastMember, Movie, SolutionResponse, StartPuzzle } from 'src/models';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +45,16 @@ export class PuzzleService {
 
   public getPersonFilmography(id: number): Observable<Movie[]> {
     return this.http.get<Movie[]>(HOST + ENDPOINTS.person + id + '/filmography/');
+  }
+
+  public postSolution(puzzleId: number, sequence: number[]): Observable<SolutionResponse> {
+    return this.http.post<SolutionResponse>(HOST + ENDPOINTS.solution, {
+        solution: sequence, 
+        puzzle: puzzleId, 
+    });
+  }
+
+  public getSolution(token: string): Observable<SolutionResponse> {
+    return this.http.get<SolutionResponse>(HOST + ENDPOINTS.solution + token + '/');
   }
 }

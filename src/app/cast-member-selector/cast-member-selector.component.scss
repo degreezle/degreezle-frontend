@@ -16,24 +16,3 @@
   font-size: 16px;
 
 }
-
-
-.cast {
-  width: 140px;
-  height: 140px;
-  border-radius: 100%;
-  border: rgb(175, 172, 172) 1px solid;
-  background-color: rgb(218, 216, 216);
-  box-shadow: 0 1px 3px rgb(0 0 0 / 35%);
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-
-  img {
-    min-width: 100%;
-    min-height: 100%;
-  }
-}
-

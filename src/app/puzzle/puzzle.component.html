@@ -1,12 +1,16 @@
-<div class="game">
-    <div class="film poster">
-        <img src="https://image.tmdb.org/t/p/w500{{puzzle?.start_movie?.poster_path}}">
-    </div>
+
+<div *ngIf="!token" class="game">
+    <app-movie-display [item]="puzzle?.start_movie"></app-movie-display>
     <div *ngFor="let id of puzzleSequence; let i = index"> 
-        <app-cast-member-selector *ngIf="i % 2 === 0" [movieId]="id" (chosen)="puzzleSequence.push($event)"></app-cast-member-selector>
-        <app-movie-selector *ngIf="i % 2 !== 0" [castMemberId]="id" (chosen)="puzzleSequence.push($event)"></app-movie-selector>
+        <app-cast-member-selector *ngIf="showMovieSelector(i)" [movieId]="id" (chosen)="add($event)"></app-cast-member-selector>
+        <app-movie-selector *ngIf="showCastMemberSelector(i)" [castMemberId]="id" (chosen)="add($event)"></app-movie-selector>
     </div>
-    <div class="film poster">
-        <img src="https://image.tmdb.org/t/p/w500{{puzzle?.end_movie?.poster_path}}">
+    <div *ngIf="solved">Yay! Share your or view your solution: <a *ngIf="solvedSolution?.token" href="https://degreezle-test.firebaseapp.com/solution/{{solvedSolution?.token}}">{{solvedSolution?.token}}</a></div>
+    <app-movie-display [item]="puzzle?.end_movie"></app-movie-display>
+</div>
+<div *ngIf="token" class="game">
+    <div *ngFor="let item of loadedSolution; let i = index">
+        <app-movie-display *ngIf="i % 2 === 0" [item]="item"></app-movie-display>
+        <app-cast-member-display *ngIf="i % 2 !== 0" [item]="item"></app-cast-member-display>
     </div>
 </div>
