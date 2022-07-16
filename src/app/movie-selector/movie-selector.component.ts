@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Movie } from '../../models';
+import { PuzzleService } from '../services/puzzle-service.service';
 
 
 @Component({
@@ -10,16 +11,19 @@ import { Movie } from '../../models';
   templateUrl: './movie-selector.component.html',
   styleUrls: ['./movie-selector.component.scss']
 })
-export class MovieSelectorComponent implements OnInit {
+export class MovieSelectorComponent implements OnChanges {
 
-  @Output() chosen: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() chosen: EventEmitter<number> = new EventEmitter<number>();
+  @Input() castMemberId: number | undefined = undefined;
 
   typing = false;
 
   myControl = new FormControl(null);
 
-  @Input() options: Movie[] = [];
+  options: Movie[] = [];
   filteredOptions: Observable<Movie[]> | undefined;
+
+  constructor(public puzzleService: PuzzleService) {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -27,7 +31,13 @@ export class MovieSelectorComponent implements OnInit {
       map(value => this._filter(value || '')),
     );
 
-    this.myControl.valueChanges.subscribe(v => { if (this.hasChosen()) this.chosen.emit(); });
+    this.myControl.valueChanges.subscribe(v => { if (this.hasChosen()) this.chosen.emit(this.myControl.value.id); });
+  }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    if (changes.castMemberId && this.castMemberId) {
+      this.options = await this.puzzleService.getPersonFilmography(this.castMemberId).toPromise();
+    }
   }
 
   private _filter(value: string): Movie[] {

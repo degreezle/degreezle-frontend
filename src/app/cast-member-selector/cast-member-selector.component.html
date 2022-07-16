@@ -19,5 +19,9 @@
     </mat-form-field>
   </form>
   <img  *ngIf="!typing && !hasChosen()" src="/assets/question-actor.svg" width="40px">
-  <img  *ngIf="hasChosen()" src="https://image.tmdb.org/t/p/w500{{myControl.value.profile_path}}" width="150px">
+  
+</div>
+
+<div *ngIf="hasChosen()" class="cast">
+  <img   src="https://image.tmdb.org/t/p/w500{{myControl.value.profile_path}}" width="150px">
 </div>

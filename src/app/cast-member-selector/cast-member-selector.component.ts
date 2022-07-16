@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CastMember } from '../../models';
+import { PuzzleService } from '../services/puzzle-service.service';
 
 
 @Component({
@@ -10,16 +11,19 @@ import { CastMember } from '../../models';
   templateUrl: './cast-member-selector.component.html',
   styleUrls: ['./cast-member-selector.component.scss']
 })
-export class CastMemberSelectorComponent implements OnInit {
+export class CastMemberSelectorComponent implements OnChanges {
 
-  @Output() chosen: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() chosen: EventEmitter<number> = new EventEmitter<number>();
+  @Input() movieId: number | undefined = undefined;
 
   typing = false;
 
   myControl = new FormControl(null);
 
-  @Input() options: CastMember[] = [];
+  options: CastMember[] = [];
   filteredOptions: Observable<CastMember[]> | undefined;
+
+  constructor(public puzzleService: PuzzleService) {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -27,8 +31,16 @@ export class CastMemberSelectorComponent implements OnInit {
       map(value => this._filter(value || '')),
     );
 
-    this.myControl.valueChanges.subscribe(v => { if (this.hasChosen()) this.chosen.emit(); });
+    this.myControl.valueChanges.subscribe(v => { if (this.hasChosen()) this.chosen.emit(this.myControl.value.id); });
   }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    if (changes.movieId && this.movieId) {
+      this.options = await this.puzzleService.getMovieCrew(this.movieId).toPromise();
+    }
+  }
+
+
 
   private _filter(value: string): CastMember[] {
     const filterValue = value.toLowerCase();

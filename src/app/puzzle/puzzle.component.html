@@ -2,6 +2,10 @@
     <div class="film poster">
         <img src="https://image.tmdb.org/t/p/w500{{puzzle?.start_movie?.poster_path}}">
     </div>
+    <div *ngFor="let id of puzzleSequence; let i = index"> 
+        <app-cast-member-selector *ngIf="i % 2 === 0" [movieId]="id" (chosen)="puzzleSequence.push($event)"></app-cast-member-selector>
+        <app-movie-selector *ngIf="i % 2 !== 0" [castMemberId]="id" (chosen)="puzzleSequence.push($event)"></app-movie-selector>
+    </div>
     <div class="film poster">
         <img src="https://image.tmdb.org/t/p/w500{{puzzle?.end_movie?.poster_path}}">
     </div>

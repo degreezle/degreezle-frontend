@@ -10,12 +10,16 @@
              [matAutocomplete]="auto">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          <img src="assets/{{option.poster_path}}"  width="25px">
+          <img src="https://image.tmdb.org/t/p/w500{{option.poster_path}}"  width="25px">
           {{option.title}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
   </form>
-  <img  *ngIf="hasChosen()" src="assets/{{myControl.value.img_path}}">
+  
 </div>
-<div class="who" *ngIf="!typing && !hasChosen()">?</div>
+<div (click)="typing=true" class="who" *ngIf="!typing && !hasChosen()">?</div>
+
+<div *ngIf="hasChosen()" class="film poster">
+  <img src="https://image.tmdb.org/t/p/w500{{myControl.value.poster_path}}">
+</div>

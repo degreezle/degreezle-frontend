@@ -11,9 +11,14 @@ export class PuzzleComponent implements OnInit {
 
   puzzle: StartPuzzle | null = null;
 
+  puzzleSequence: number[] = [];
+
   constructor(public puzzleService: PuzzleService) {
     puzzleService.getStartPuzzle();
-    puzzleService.puzzle$.subscribe(puzzle => this.puzzle = puzzle);
+    puzzleService.puzzle$.subscribe(puzzle => {
+      this.puzzle = puzzle;
+      this.puzzleSequence = [this.puzzle.start_movie.id];
+    });
   }
 
   ngOnInit(): void {
