@@ -1,16 +1,16 @@
 <div [class.typing]="typing" [class.poster]="myControl.value" (click)="typing=true">
-  <form *ngIf="typing && !hasChosen()" class="form">
+  <form *ngIf="!hasChosen()" class="form">
     <mat-form-field class="full-width">
-      <mat-label>Select one</mat-label>
+      <mat-label>Pick a film</mat-label>
       <input type="text"
-             placeholder="Pick one"
+             placeholder="Start typing"
              aria-label="Number"
              matInput
              [formControl]="myControl"
              [matAutocomplete]="auto">
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          <img src="https://image.tmdb.org/t/p/w500{{option.poster_path}}"  width="25px">
+          <img *ngIf="option.poster_path !== 'None'" src="https://image.tmdb.org/t/p/w500{{option.poster_path}}" width="25px">
           {{option.title}}
         </mat-option>
       </mat-autocomplete>
@@ -18,6 +18,5 @@
   </form>
   
 </div>
-<div (click)="typing=true" class="who" *ngIf="!typing && !hasChosen()">????</div>
 
 <app-movie-display *ngIf="hasChosen()" [item]="myControl.value"></app-movie-display>

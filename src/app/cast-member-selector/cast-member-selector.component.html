@@ -1,9 +1,9 @@
 <div [class.typing]="typing" [class.poster]="myControl.value" (click)="typing=true">
-  <form *ngIf="typing && !hasChosen()" class="form">
+  <form *ngIf="!hasChosen()" class="form">
     <mat-form-field class="full-width">
-      <mat-label>Select one</mat-label>
+      <mat-label>Pick a crew member</mat-label>
       <input type="text"
-             placeholder="Pick one"
+             placeholder="Start typing"
              aria-label="Number"
              matInput
              [formControl]="myControl"
@@ -20,6 +20,5 @@
   </form>
   
 </div>
-<div (click)="typing=true" class="who" *ngIf="!typing && !hasChosen()">????</div>
 
 <app-cast-member-display *ngIf="hasChosen()" [item]="myControl.value"></app-cast-member-display>
