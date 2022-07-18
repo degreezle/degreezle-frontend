@@ -18,7 +18,7 @@ export class MovieSelectorComponent implements OnChanges {
 
   typing = false;
 
-  myControl = new FormControl(null);
+  myControl = new FormControl('');
 
   options: Movie[] = [];
   filteredOptions: Observable<Movie[]> | undefined;
@@ -37,7 +37,7 @@ export class MovieSelectorComponent implements OnChanges {
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.castMemberId && this.castMemberId) {
       this.options = await this.puzzleService.getPersonFilmography(this.castMemberId).toPromise();
-      this.filteredOptions = of(this._filter(''));
+      this.myControl.setValue('');
     }
   }
 
