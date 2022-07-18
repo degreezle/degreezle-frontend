@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CastMember } from '../../models';
 import { PuzzleService } from '../services/puzzle-service.service';
@@ -37,10 +37,9 @@ export class CastMemberSelectorComponent implements OnChanges {
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.movieId && this.movieId) {
       this.options = await this.puzzleService.getMovieCrew(this.movieId).toPromise();
+      this.filteredOptions = of(this._filter(''));
     }
   }
-
-
 
   private _filter(value: string): CastMember[] {
     const filterValue = value.toLowerCase();

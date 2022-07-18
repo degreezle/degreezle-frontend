@@ -13,8 +13,7 @@ export class PuzzlePageComponent implements OnInit {
   constructor(public route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.route);
-    this.route.paramMap.subscribe(paramMap => {this.token = paramMap.get('token'); console.log(paramMap)}) 
+    this.route.paramMap.subscribe(paramMap => this.token = paramMap.get('token')) 
   }
 
 }

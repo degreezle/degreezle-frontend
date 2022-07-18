@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Movie } from '../../models';
 import { PuzzleService } from '../services/puzzle-service.service';
@@ -37,6 +37,7 @@ export class MovieSelectorComponent implements OnChanges {
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.castMemberId && this.castMemberId) {
       this.options = await this.puzzleService.getPersonFilmography(this.castMemberId).toPromise();
+      this.filteredOptions = of(this._filter(''));
     }
   }
 

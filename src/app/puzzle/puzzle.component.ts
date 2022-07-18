@@ -21,11 +21,13 @@ export class PuzzleComponent implements OnChanges {
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute) {
     puzzleService.getStartPuzzle();
     puzzleService.puzzle$.subscribe(puzzle => {
-      this.puzzle = puzzle;
-      this.puzzleSequence = [this.puzzle.start_movie.id];
-      puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe((movies: CastMember[]) => this.possibleEndings = movies.map(movie => movie.id))
+      if (puzzle.id) {
+        console.log(puzzle)
+        this.puzzle = puzzle;
+        this.puzzleSequence = [this.puzzle.start_movie.id];
+        puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe((movies: CastMember[]) => this.possibleEndings = movies.map(movie => movie.id))
+      }
     });
-
   }
 
   async ngOnChanges(changes: SimpleChanges) {
