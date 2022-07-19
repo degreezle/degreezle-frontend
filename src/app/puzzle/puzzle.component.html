@@ -7,7 +7,6 @@
     </div>
     <div *ngIf="solved">Yay! Share your or view your solution: <a *ngIf="solvedSolution?.token" href="https://degreezle-test.firebaseapp.com/solution/{{solvedSolution?.token}}">{{solvedSolution?.token}}</a></div>
     <app-movie-display [item]="puzzle?.end_movie"></app-movie-display>
-    <div #bottom>yo</div>
 </div>
 <div *ngIf="token" class="game">
     <div *ngFor="let item of loadedSolution; let i = index">
