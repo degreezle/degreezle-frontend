@@ -1,17 +1,19 @@
-<div [class.typing]="typing" [class.poster]="myControl.value" (click)="typing=true">
-  <form *ngIf="!hasChosen()" class="form">
-    <mat-form-field class="full-width">
-      <mat-label>Pick a film</mat-label>
+<div [class.poster]="myControl.value" (click)="clicked()">
+  <form *ngIf="!hasChosen()" class="form-full-width">
+    <mat-form-field class="input-full-width" >
+      <mat-label>Pick a film <mat-icon>movie</mat-icon></mat-label>
       <input type="text"
              placeholder="Start typing"
              aria-label="Number"
              matInput
              [formControl]="myControl"
              [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" [panelWidth]="320">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          <img *ngIf="option.poster_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{option.poster_path}}" width="25px">
-          {{option.title}}
+          <div class="option">
+            <div> <img *ngIf="option.poster_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{option.poster_path}}" class="movie-pic"></div>
+            <div class="movie-name">{{option.title}}</div>
+          </div>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

@@ -1,7 +1,7 @@
 <div [class.poster]="myControl.value" (click)="clicked()">
-  <form *ngIf="!hasChosen()" class="form">
-    <mat-form-field class="full-width">
-      <mat-label>Pick a crew member</mat-label>
+  <form *ngIf="!hasChosen()" class="form-full-width">
+    <mat-form-field class="input-full-width" >
+      <mat-label>Pick a crew member <mat-icon>account_box</mat-icon></mat-label>
       <input type="text"
              #input
              placeholder="Start typing"
@@ -9,8 +9,8 @@
              matInput
              [formControl]="myControl"
              [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" [panelWidth]="320">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
           <div class="option">
             <div><img *ngIf="option.profile_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{option.profile_path}}" class="cast-pic"></div>
             <div class="cast-name">{{option.name}}</div>

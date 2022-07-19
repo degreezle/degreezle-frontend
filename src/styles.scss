@@ -5,9 +5,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
+body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
 
 /* Swiper */
 
@@ -36,4 +34,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 22px;
   font-weight: bold;
   color: #fff;
+}
+
+.form-full-width {
+  padding: 20px;
+}
+
+.input-full-width {
+  width: 320px;
+}
+
+.mat-form-field-label-wrapper .mat-icon {
+  vertical-align: middle !important;
 }

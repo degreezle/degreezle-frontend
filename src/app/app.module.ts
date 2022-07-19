@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { SwiperModule } from 'swiper/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { CastMemberSelectorComponent } from './cast-member-selector/cast-member-selector.component';
@@ -39,6 +40,7 @@ import { CastMemberDisplayComponent } from './cast-member-display/cast-member-di
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule, 
     SwiperModule,
   ],
   providers: [],

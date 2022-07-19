@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { CastMember } from '../../models';
@@ -17,7 +16,7 @@ export class CastMemberSelectorComponent implements OnChanges {
   @Output() chosen: EventEmitter<number> = new EventEmitter<number>();
   @Input() movieId: number | undefined = undefined;
 
-  clicks = 0;
+  dontOpenKeyboard = true;
 
   myControl = new FormControl('');
 
@@ -45,9 +44,9 @@ export class CastMemberSelectorComponent implements OnChanges {
   }
 
   clicked() {
-    this.clicks += 1;
-    if (this.clicks == 1) {
+    if (this.dontOpenKeyboard) {
       this.inputField?.nativeElement.blur();
+      this.dontOpenKeyboard = false;
     }
   }
 

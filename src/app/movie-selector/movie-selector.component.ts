@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -16,7 +16,8 @@ export class MovieSelectorComponent implements OnChanges {
   @Output() chosen: EventEmitter<number> = new EventEmitter<number>();
   @Input() castMemberId: number | undefined = undefined;
 
-  typing = false;
+  dontOpenKeyboard = true;
+  @ViewChild('input') inputField: ElementRef | undefined;
 
   myControl = new FormControl('');
 
@@ -38,6 +39,13 @@ export class MovieSelectorComponent implements OnChanges {
     if (changes.castMemberId && this.castMemberId) {
       this.options = await this.puzzleService.getPersonFilmography(this.castMemberId).toPromise();
       this.myControl.setValue('');
+    }
+  }
+
+  clicked() {
+    if (this.dontOpenKeyboard) {
+      this.inputField?.nativeElement.blur();
+      this.dontOpenKeyboard = false;
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CastMember, Movie, SolutionResponse, StartPuzzle } from 'src/models';
 import { PuzzleService } from '../services/puzzle-service.service';
@@ -17,12 +17,12 @@ export class PuzzleComponent implements OnChanges {
   solved = false;
   loadedSolution: any[] = [];
   solvedSolution: SolutionResponse | null = null;
+  @ViewChild('scroll', { read: ElementRef }) public scroll: ElementRef | undefined;
 
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute) {
     puzzleService.getStartPuzzle();
     puzzleService.puzzle$.subscribe(puzzle => {
       if (puzzle.id) {
-        console.log(puzzle)
         this.puzzle = puzzle;
         this.puzzleSequence = [this.puzzle.start_movie.id];
         puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe((movies: CastMember[]) => this.possibleEndings = movies.map(movie => movie.id))
@@ -37,12 +37,15 @@ export class PuzzleComponent implements OnChanges {
   }
 
   add(id: number) {
-    this.puzzleSequence.push(id)
+    this.puzzleSequence.push(id);
     this.solved = this.hasFoundSolution();
     if (this.solved && this.puzzle) {
       this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).subscribe(
         (response: SolutionResponse) => this.solvedSolution = response
       );
+    } 
+    if (this.scroll) {
+      this.scroll.nativeElement.scrollTop = this.scroll?.nativeElement.scrollHeight;
     }
   }
 
