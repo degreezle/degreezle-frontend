@@ -1,8 +1,9 @@
-<div [class.typing]="typing" [class.poster]="myControl.value" (click)="typing=true">
+<div [class.poster]="myControl.value" (click)="clicked()">
   <form *ngIf="!hasChosen()" class="form">
     <mat-form-field class="full-width">
       <mat-label>Pick a crew member</mat-label>
       <input type="text"
+             #input
              placeholder="Start typing"
              aria-label="Number"
              matInput
