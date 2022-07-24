@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { InstructionsModalComponent } from '../instructions-modal/instructions-modal.component';
 
 @Component({
   selector: 'app-puzzle-page',
@@ -10,10 +12,13 @@ export class PuzzlePageComponent implements OnInit {
 
   token: string | null = null;
 
-  constructor(public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute, public dialog: MatDialog  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => this.token = paramMap.get('token')) 
+    this.dialog.open(InstructionsModalComponent, {
+      backdropClass: 'modal-backdrop', 
+      maxWidth: 500, 
+    });
   }
-
 }

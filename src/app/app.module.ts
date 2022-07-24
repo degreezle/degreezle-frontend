@@ -10,6 +10,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button'
 import { SwiperModule } from 'swiper/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { CastMemberSelectorComponent } from './cast-member-selector/cast-member-selector.component';
@@ -18,6 +20,7 @@ import { PuzzleComponent } from './puzzle/puzzle.component';
 import { PuzzlePageComponent } from './puzzle-page/puzzle-page.component';
 import { MovieDisplayComponent } from './movie-display/movie-display.component';
 import { CastMemberDisplayComponent } from './cast-member-display/cast-member-display.component';
+import { InstructionsModalComponent } from './instructions-modal/instructions-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { CastMemberDisplayComponent } from './cast-member-display/cast-member-di
     PuzzlePageComponent,
     MovieDisplayComponent,
     CastMemberDisplayComponent,
+    InstructionsModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,8 @@ import { CastMemberDisplayComponent } from './cast-member-display/cast-member-di
     MatFormFieldModule,
     MatInputModule,
     MatIconModule, 
+    MatButtonModule, 
+    MatDialogModule,
     SwiperModule,
   ],
   providers: [],
