@@ -10,19 +10,13 @@
   e.g.:
   <img class="example-solution" src="assets/examplesolution.png">
   </p>
-  <p>
-  all data is from TMDB and is cached each day when retrieved. 
-  so updating TMDB today probably won’t help you connect (today_start) to (today_end) 
-  but it will help next time you need that connection to solve the degreezle. 
-  we wholeheartedly encourage you to improve the data quality of TMDB! 🙏
-  </p>
-  <p>
-  if you like the puzzle let us know (if you can’t find us you’ll find us) 🕵️‍♀️
-  </p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <!-- <button mat-button mat-dialog-close>Swag</button> -->
+  <button mat-stroked-button aria-label="Our data" [mat-dialog-close]="true" routerLink="/our-data">
+    Learn more about our data
+  </button>
   <button mat-stroked-button aria-label="Understood instructions" [mat-dialog-close]="true" cdkFocusInitial>
-    Swag
+    OK
   </button>
 </mat-dialog-actions>

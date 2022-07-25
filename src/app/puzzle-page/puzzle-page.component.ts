@@ -18,6 +18,7 @@ export class PuzzlePageComponent implements OnInit {
     this.route.paramMap.subscribe(paramMap => this.token = paramMap.get('token')) 
     this.dialog.open(InstructionsModalComponent, {
       backdropClass: 'modal-backdrop', 
+      closeOnNavigation: true, 
       maxWidth: 500, 
     });
   }
