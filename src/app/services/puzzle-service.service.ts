@@ -26,16 +26,16 @@ export class PuzzleService {
 
   constructor(private http: HttpClient) { }
 
-  fetchStartPuzzle(): Observable<StartPuzzle> {
-    return this.http.get<StartPuzzle>(HOST + ENDPOINTS.init)
+  fetchStartPuzzle(puzzleId?: string | null): Observable<StartPuzzle> {
+    return this.http.get<StartPuzzle>(HOST + ENDPOINTS.puzzle + (puzzleId? puzzleId + '/': ''))
       .pipe(
         tap((puzzle: StartPuzzle) => this.puzzle$.next(puzzle)),
       );
   }
 
-  public getStartPuzzle(force?: boolean) {
-    if (this.puzzle$.getValue().id === 0 || force) {
-      this.fetchStartPuzzle().pipe(take(1)).subscribe();
+  public getStartPuzzle(puzzleId?: string | null, force?: boolean) {
+    if (this.puzzle$.getValue().id === 0 || this.puzzle$.getValue().id !== Number(puzzleId) || force) {
+      this.fetchStartPuzzle(puzzleId).pipe(take(1)).subscribe();
     }
   }
 

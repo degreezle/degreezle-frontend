@@ -6,6 +6,7 @@ import { PuzzlePageComponent } from './puzzle-page/puzzle-page.component';
 const routes: Routes = [
   { path: 'our-data', component: OurDataPageComponent }, 
   { path: 'solution/:token', component: PuzzlePageComponent },
+  { path: ':puzzleId', component: PuzzlePageComponent },
   { path: '', component: PuzzlePageComponent, pathMatch: 'full' }, 
 ];
 

@@ -13,6 +13,7 @@ import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solutio
 export class PuzzleComponent implements OnChanges {
 
   @Input() token: string | null = null;
+  @Input() puzzleId: string | null = null;
   puzzle: StartPuzzle | null = null;
   puzzleSequence: number[] = [];
   possibleEndings: number[] = [];
@@ -23,7 +24,7 @@ export class PuzzleComponent implements OnChanges {
   @ViewChild('scroll', { read: ElementRef }) public scroll: ElementRef | undefined;
 
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
-    puzzleService.getStartPuzzle();
+    this.puzzleService.getStartPuzzle();
     puzzleService.puzzle$.subscribe(puzzle => {
       if (puzzle.id) {
         this.puzzle = puzzle;
@@ -38,11 +39,14 @@ export class PuzzleComponent implements OnChanges {
     if (changes.token && this.token) {
       this.loadedSolution = (await this.puzzleService.getSolution(this.token).toPromise()).solution;
     }
+    if (changes.puzzleId && this.puzzleId) {
+      this.puzzleService.getStartPuzzle(this.puzzleId);
+    }
   }
 
   async add(id: number) {
     this.puzzleSequence.push(id);
-    this.solved = this.hasFoundSolution();
+    this.solved = true;//this.hasFoundSolution();
     if (this.solved && this.puzzle) {
       this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise() 
       this.metrics = await this.puzzleService.getMetrics().toPromise();
