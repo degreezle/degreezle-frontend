@@ -13,6 +13,7 @@ import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solutio
 export class PuzzleComponent implements OnChanges {
 
   @Input() token: string | null = null;
+  @Input() puzzleId: string | null = null;
   puzzle: StartPuzzle | null = null;
   puzzleSequence: number[] = [];
   possibleEndings: number[] = [];
@@ -23,7 +24,7 @@ export class PuzzleComponent implements OnChanges {
   @ViewChild('scroll', { read: ElementRef }) public scroll: ElementRef | undefined;
 
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
-    puzzleService.getStartPuzzle();
+    this.puzzleService.getStartPuzzle();
     puzzleService.puzzle$.subscribe(puzzle => {
       if (puzzle.id) {
         this.puzzle = puzzle;
@@ -37,6 +38,9 @@ export class PuzzleComponent implements OnChanges {
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.token && this.token) {
       this.loadedSolution = (await this.puzzleService.getSolution(this.token).toPromise()).solution;
+    }
+    if (changes.puzzleId && this.puzzleId) {
+      this.puzzleService.getStartPuzzle(this.puzzleId);
     }
   }
 
