@@ -1,22 +1,22 @@
 <mat-dialog-content>
   <h2>welcome 🤗</h2>
-  <p>
-  degreezle asks only one thing of you: connect the first film to the last. 
-  every puzzle has a solution of six or less steps but be our guest and take as long as you want. 
-  build a solution by connecting film to cast&crew to their filmographies &tc &tc.
-  </p>
+  <p><strong>film in the gaps</strong> is a daily puzzle asking only one thing of you: connect the first film to the last.</p>
+  <p>each puzzle has a solution of six or less steps but "be our guest" and take as long as you want!</p>
+  <p>build your solution by connecting film, to cast&crew, to their filmographies, und so weiter.</p>
 
-  <p>
-  e.g.:
-  <img class="example-solution" src="assets/examplesolution.png">
+  <p class="example-solution">
+    <img class="example-solution" src="assets/examplesolution.png">
+    e.g. <strong>Nude Tuesday</strong> stars <strong>Damon Herriman</strong> who played Charles Manson in 
+    <strong>Once Upon a Time in Hollywood...</strong> which was directed by <strong>Quentin Tarantino</strong> 
+    who wrote <strong>True Romance</strong> which was directed by <strong>Tony Scott</strong> who also directed 
+    <strong>Top Gun</strong>!
   </p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <!-- <button mat-button mat-dialog-close>Swag</button> -->
-  <button mat-stroked-button aria-label="Our data" [mat-dialog-close]="true" routerLink="/our-data">
-    Learn more about our data
+  <button mat-stroked-button aria-label="our data" [mat-dialog-close]="true" routerLink="/our-data">
+    about our data
   </button>
-  <button mat-stroked-button aria-label="Understood instructions" [mat-dialog-close]="true" cdkFocusInitial>
-    OK
+  <button mat-stroked-button aria-label="understood instructions" [mat-dialog-close]="true" cdkFocusInitial>
+    i'm ready to film in the gaps
   </button>
 </mat-dialog-actions>
