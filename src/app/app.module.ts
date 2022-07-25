@@ -11,7 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { SwiperModule } from 'swiper/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { CastMemberSelectorComponent } from './cast-member-selector/cast-member-selector.component';
@@ -51,6 +52,7 @@ import { SolutionMetricsModalComponent } from './solution-metrics-modal/solution
     MatIconModule, 
     MatButtonModule, 
     MatDialogModule,
+    MatToolbarModule, 
     SwiperModule,
   ],
   providers: [],
