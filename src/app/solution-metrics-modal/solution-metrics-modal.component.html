@@ -1,0 +1,20 @@
+<mat-dialog-content *ngIf="data.solution">
+  <h2>nice one 🎉</h2>
+  <p>you connected {{data.puzzle.start_movie.title}} to {{data.puzzle.end_movie.title}} in {{data.solution.solution.length}} steps 🥳</p>
+  <p>{{data.solution.count}} people found the same solution, {{data.metrics.num_solved}} people have found some solution 📈</p>
+  <p>the shortest solution found so far was {{data.metrics.shortest_solution}} steps long 😳</p>
+  <p>the average number of steps taken to solve was {{data.metrics.average_steps | number: '1.0-1' }} steps long 👌</p>
+  <p>the median number of steps taken to solve was {{data.metrics.median_steps | number: '1.0-1' }} steps long 🤔</p>
+  <p>copy your result to the clipboard with the button below. it’ll include a link to your exact solution for people who’ve already solved or are comfortable with spoilers 😉</p>
+  <button mat-stroked-button aria-label="Copy result" (click)="copySolution()">
+    Copy result
+  </button>
+  <!-- <p>your average solution length is D steps 🧮</p> -->
+  <!-- <p>you’ve solved E puzzles in a row 🀹</p> -->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button aria-label="Understood instructions" [mat-dialog-close]="true" cdkFocusInitial>
+    OK
+  </button>
+</mat-dialog-actions>
+  

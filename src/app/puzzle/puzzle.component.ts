@@ -1,7 +1,9 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { CastMember, Movie, SolutionResponse, StartPuzzle } from 'src/models';
+import { CastMember, Metrics, Movie, SolutionResponse, StartPuzzle } from 'src/models';
 import { PuzzleService } from '../services/puzzle-service.service';
+import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solution-metrics-modal.component';
 
 @Component({
   selector: 'app-puzzle',
@@ -17,9 +19,10 @@ export class PuzzleComponent implements OnChanges {
   solved = false;
   loadedSolution: any[] = [];
   solvedSolution: SolutionResponse | null = null;
+  metrics: Metrics | null = null;
   @ViewChild('scroll', { read: ElementRef }) public scroll: ElementRef | undefined;
 
-  constructor(public puzzleService: PuzzleService, public route: ActivatedRoute) {
+  constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
     puzzleService.getStartPuzzle();
     puzzleService.puzzle$.subscribe(puzzle => {
       if (puzzle.id) {
@@ -28,6 +31,7 @@ export class PuzzleComponent implements OnChanges {
         puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe((movies: CastMember[]) => this.possibleEndings = movies.map(movie => movie.id))
       }
     });
+    
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -36,17 +40,32 @@ export class PuzzleComponent implements OnChanges {
     }
   }
 
-  add(id: number) {
+  async add(id: number) {
     this.puzzleSequence.push(id);
     this.solved = this.hasFoundSolution();
     if (this.solved && this.puzzle) {
-      this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).subscribe(
-        (response: SolutionResponse) => this.solvedSolution = response
-      );
+      this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise() 
+      this.metrics = await this.puzzleService.getMetrics().toPromise();
+      this.showCongratulations();
     } 
     if (this.scroll) {
       this.scroll.nativeElement.scrollTop = this.scroll?.nativeElement.scrollHeight;
     }
+  }
+
+  showCongratulations() {
+    this.dialog.open(SolutionMetricsModalComponent, {
+      backdropClass: 'modal-backdrop', 
+      closeOnNavigation: true, 
+      restoreFocus: false, 
+      autoFocus: true,
+      maxWidth: 500, 
+      data: {
+        puzzle: this.puzzle, 
+        solution: this.solvedSolution, 
+        metrics: this.metrics,
+      }
+    });
   }
 
   hasFoundSolution() {

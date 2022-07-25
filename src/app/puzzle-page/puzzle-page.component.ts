@@ -16,10 +16,10 @@ export class PuzzlePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => this.token = paramMap.get('token')) 
-    this.dialog.open(InstructionsModalComponent, {
-      backdropClass: 'modal-backdrop', 
-      closeOnNavigation: true, 
-      maxWidth: 500, 
-    });
+    // this.dialog.open(InstructionsModalComponent, {
+    //   backdropClass: 'modal-backdrop', 
+    //   closeOnNavigation: true, 
+    //   maxWidth: 500, 
+    // });
   }
 }

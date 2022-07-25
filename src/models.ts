@@ -35,3 +35,12 @@ export interface Movie {
   count?: number;
 }
 
+/**
+ * Metrics model
+ */
+ export interface Metrics {
+  num_solved: number;
+  shortest_solution: number;
+  average_steps: number;
+  median_steps: number;
+}

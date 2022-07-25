@@ -6,5 +6,6 @@ export const ENDPOINTS = {
     init: prefix + 'puzzle/', 
     movie: prefix + 'movie/', 
     person: prefix + 'person/', 
-    solution: prefix + 'solution/'
+    solution: prefix + 'solution/', 
+    metrics: prefix + 'metrics/'
 }

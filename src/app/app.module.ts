@@ -22,6 +22,7 @@ import { MovieDisplayComponent } from './movie-display/movie-display.component';
 import { CastMemberDisplayComponent } from './cast-member-display/cast-member-display.component';
 import { InstructionsModalComponent } from './instructions-modal/instructions-modal.component';
 import { OurDataPageComponent } from './our-data-page/our-data-page.component';
+import { SolutionMetricsModalComponent } from './solution-metrics-modal/solution-metrics-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { OurDataPageComponent } from './our-data-page/our-data-page.component';
     CastMemberDisplayComponent,
     InstructionsModalComponent,
     OurDataPageComponent,
+    SolutionMetricsModalComponent,
   ],
   imports: [
     BrowserModule,
