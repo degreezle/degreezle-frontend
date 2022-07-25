@@ -46,7 +46,7 @@ export class PuzzleComponent implements OnChanges {
 
   async add(id: number) {
     this.puzzleSequence.push(id);
-    this.solved = true;//this.hasFoundSolution();
+    this.solved = this.hasFoundSolution();
     if (this.solved && this.puzzle) {
       this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise() 
       this.metrics = await this.puzzleService.getMetrics().toPromise();
