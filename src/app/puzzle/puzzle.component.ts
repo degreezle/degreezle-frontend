@@ -24,7 +24,6 @@ export class PuzzleComponent implements OnChanges {
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
 
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
-    this.puzzleService.getStartPuzzle();
     puzzleService.puzzle$.subscribe(puzzle => {
       if (puzzle.id) {
         this.puzzle = puzzle;
@@ -39,7 +38,7 @@ export class PuzzleComponent implements OnChanges {
     if (changes.token && this.token) {
       this.loadedSolution = (await this.puzzleService.getSolution(this.token).toPromise()).solution;
     }
-    if (changes.puzzleId && this.puzzleId) {
+    if (changes.puzzleId) {
       this.puzzleService.getStartPuzzle(this.puzzleId);
     }
   }
