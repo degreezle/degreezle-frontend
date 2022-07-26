@@ -22,6 +22,7 @@ export class PuzzleComponent implements OnChanges {
   solvedSolution: SolutionResponse | null = null;
   metrics: Metrics | null = null;
   loading = true;
+  error = false;
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
 
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
@@ -36,12 +37,14 @@ export class PuzzleComponent implements OnChanges {
               this.loading = false;
             }, 
             () => {
+              this.error = true;
               this.loading = false;
             }
           )
         }
       }, 
       () => {
+        this.error = true;
         this.loading = false;
       }
     );
@@ -50,8 +53,16 @@ export class PuzzleComponent implements OnChanges {
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.token && this.token) {
-      this.loadedSolution = (await this.puzzleService.getSolution(this.token).toPromise()).solution;
-      this.loading = false;
+      this.puzzleService.getSolution(this.token).subscribe(
+        solution => {
+          this.loadedSolution = solution.solution;
+          this.loading = false;
+        }, 
+        () => {
+          this.error = true;
+          this.loading = false;
+        }
+      )  
     }
     if (changes.puzzleId) {
       this.loading = true;
