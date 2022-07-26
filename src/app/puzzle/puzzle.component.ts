@@ -21,24 +21,40 @@ export class PuzzleComponent implements OnChanges {
   loadedSolution: any[] = [];
   solvedSolution: SolutionResponse | null = null;
   metrics: Metrics | null = null;
+  loading = true;
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
 
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
-    puzzleService.puzzle$.subscribe(puzzle => {
-      if (puzzle.id) {
-        this.puzzle = puzzle;
-        this.puzzleSequence = [this.puzzle.start_movie.id];
-        puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe((movies: CastMember[]) => this.possibleEndings = movies.map(movie => movie.id))
+    puzzleService.puzzle$.subscribe(
+      puzzle => {
+        if (puzzle.id) {
+          this.puzzle = puzzle;
+          this.puzzleSequence = [this.puzzle.start_movie.id];
+          puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe(
+            (movies: CastMember[]) => {
+              this.possibleEndings = movies.map(movie => movie.id);
+              this.loading = false;
+            }, 
+            () => {
+              this.loading = false;
+            }
+          )
+        }
+      }, 
+      () => {
+        this.loading = false;
       }
-    });
+    );
     
   }
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.token && this.token) {
       this.loadedSolution = (await this.puzzleService.getSolution(this.token).toPromise()).solution;
+      this.loading = false;
     }
     if (changes.puzzleId) {
+      this.loading = true;
       this.puzzleService.getStartPuzzle(this.puzzleId);
     }
   }
