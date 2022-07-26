@@ -1,3 +1,4 @@
-<div *ngIf="item" class="film poster">
-    <img src="https://image.tmdb.org/t/p/w500{{item.poster_path}}">
+<div *ngIf="item" class="film poster" title="{{item.title}}">
+    <img *ngIf="item.poster_path" src="https://image.tmdb.org/t/p/w500{{item.poster_path}}">
+    <img *ngIf="!item.poster_path" src="assets/unknown-film.svg">
 </div>

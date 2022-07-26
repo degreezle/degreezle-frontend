@@ -12,7 +12,10 @@
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" [panelWidth]="320">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           <div class="option">
-            <div> <img *ngIf="option.poster_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{option.poster_path}}" class="movie-pic"></div>
+            <div> 
+              <img *ngIf="option.poster_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{option.poster_path}}" class="movie-pic">
+              <img *ngIf="!option.poster_path" src="assets/unknown-film.svg" class="movie-pic">
+            </div>
             <div class="movie-name">{{option.title}}</div>
           </div>
         </mat-option>
