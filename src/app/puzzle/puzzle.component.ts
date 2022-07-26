@@ -1,7 +1,7 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { CastMember, Metrics, Movie, SolutionResponse, StartPuzzle } from 'src/models';
+import { CastMember, Metrics, SolutionResponse, StartPuzzle } from 'src/models';
 import { PuzzleService } from '../services/puzzle-service.service';
 import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solution-metrics-modal.component';
 
@@ -21,25 +21,40 @@ export class PuzzleComponent implements OnChanges {
   loadedSolution: any[] = [];
   solvedSolution: SolutionResponse | null = null;
   metrics: Metrics | null = null;
-  @ViewChild('scroll', { read: ElementRef }) public scroll: ElementRef | undefined;
+  loading = true;
+  @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
 
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
-    this.puzzleService.getStartPuzzle();
-    puzzleService.puzzle$.subscribe(puzzle => {
-      if (puzzle.id) {
-        this.puzzle = puzzle;
-        this.puzzleSequence = [this.puzzle.start_movie.id];
-        puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe((movies: CastMember[]) => this.possibleEndings = movies.map(movie => movie.id))
+    puzzleService.puzzle$.subscribe(
+      puzzle => {
+        if (puzzle.id) {
+          this.puzzle = puzzle;
+          this.puzzleSequence = [this.puzzle.start_movie.id];
+          puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe(
+            (movies: CastMember[]) => {
+              this.possibleEndings = movies.map(movie => movie.id);
+              this.loading = false;
+            }, 
+            () => {
+              this.loading = false;
+            }
+          )
+        }
+      }, 
+      () => {
+        this.loading = false;
       }
-    });
+    );
     
   }
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.token && this.token) {
       this.loadedSolution = (await this.puzzleService.getSolution(this.token).toPromise()).solution;
+      this.loading = false;
     }
-    if (changes.puzzleId && this.puzzleId) {
+    if (changes.puzzleId) {
+      this.loading = true;
       this.puzzleService.getStartPuzzle(this.puzzleId);
     }
   }
@@ -52,9 +67,15 @@ export class PuzzleComponent implements OnChanges {
       this.metrics = await this.puzzleService.getMetrics().toPromise();
       this.showCongratulations();
     } 
-    if (this.scroll) {
-      this.scroll.nativeElement.scrollTop = this.scroll?.nativeElement.scrollHeight;
-    }
+    this.scrollToEnd();
+  }
+
+  scrollToEnd() {
+    setTimeout(() => {   
+      if (this.afterEndMovie) {                    
+      this.afterEndMovie.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
   }
 
   showCongratulations() {
