@@ -1,16 +1,18 @@
 
-<div *ngIf="!token" class="game" #scroll>
-    <app-movie-display [item]="puzzle?.start_movie"></app-movie-display>
-    <div *ngFor="let id of puzzleSequence; let i = index"> 
-        <app-cast-member-selector *ngIf="showMovieSelector(i)" [movieId]="id" (chosen)="add($event)"></app-cast-member-selector>
-        <app-movie-selector *ngIf="showCastMemberSelector(i)" [castMemberId]="id" (chosen)="add($event)"></app-movie-selector>
+<div class="game-wrapper">
+    <div *ngIf="!token" class="game" #scroll>
+        <app-movie-display [item]="puzzle?.start_movie"></app-movie-display>
+        <div *ngFor="let id of puzzleSequence; let i = index"> 
+            <app-cast-member-selector *ngIf="showMovieSelector(i)" [movieId]="id" (chosen)="add($event)"></app-cast-member-selector>
+            <app-movie-selector *ngIf="showCastMemberSelector(i)" [castMemberId]="id" (chosen)="add($event)"></app-movie-selector>
+        </div>
+        <!-- <div *ngIf="solved">Yay! Share your or view your solution: <a *ngIf="solvedSolution?.token" href="https://degreezle-test.firebaseapp.com/solution/{{solvedSolution?.token}}">{{solvedSolution?.token}}</a></div> -->
+        <app-movie-display [item]="puzzle?.end_movie"></app-movie-display>
     </div>
-    <!-- <div *ngIf="solved">Yay! Share your or view your solution: <a *ngIf="solvedSolution?.token" href="https://degreezle-test.firebaseapp.com/solution/{{solvedSolution?.token}}">{{solvedSolution?.token}}</a></div> -->
-    <app-movie-display [item]="puzzle?.end_movie"></app-movie-display>
-</div>
-<div *ngIf="token" class="game">
-    <div *ngFor="let item of loadedSolution; let i = index">
-        <app-movie-display *ngIf="i % 2 === 0" [item]="item"></app-movie-display>
-        <app-cast-member-display *ngIf="i % 2 !== 0" [item]="item"></app-cast-member-display>
+    <div *ngIf="token" class="game">
+        <div *ngFor="let item of loadedSolution; let i = index">
+            <app-movie-display *ngIf="i % 2 === 0" [item]="item"></app-movie-display>
+            <app-cast-member-display *ngIf="i % 2 !== 0" [item]="item"></app-cast-member-display>
+        </div>
     </div>
 </div>

@@ -20,7 +20,7 @@ export class PuzzlePageComponent implements OnInit {
       this.token = paramMap.get('token');
       this.puzzleId = paramMap.get('puzzleId');
     }); 
-    this.showInstructions();
+    // this.showInstructions();
   }
 
   showInstructions() {
