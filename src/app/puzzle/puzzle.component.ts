@@ -31,17 +31,15 @@ export class PuzzleComponent implements OnChanges {
       puzzle => {
         if (puzzle.id) {
           this.puzzle = puzzle;
-          this.puzzleSequence = [this.puzzle.start_movie.id];
-          puzzleService.getMovieCrew(this.puzzle.end_movie.id).subscribe(
-            (movies: CastMember[]) => {
-              this.possibleEndings = movies.map(movie => movie.id);
-              this.loading = false;
-            },
-            () => {
-              this.error = true;
-              this.loading = false;
+
+          if (this.localStorageService.hasSolved(this.puzzle.id)) {
+            this.token = this.localStorageService.getSolution(this.puzzle.id);
+            if (this.token) {
+              this.loadSolution(this.token);
             }
-          )
+          } else {
+            this.loadGameInfo(this.puzzle)
+          }
         }
       },
       () => {
@@ -54,21 +52,39 @@ export class PuzzleComponent implements OnChanges {
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.token && this.token) {
-      this.puzzleService.getSolution(this.token).subscribe(
-        solution => {
-          this.loadedSolution = solution.solution;
-          this.loading = false;
-        },
-        () => {
-          this.error = true;
-          this.loading = false;
-        }
-      )
+      this.loadSolution(this.token);
     }
     if (changes.puzzleId) {
       this.loading = true;
       this.puzzleService.getStartPuzzle(this.puzzleId);
     }
+  }
+
+  loadGameInfo(puzzle: StartPuzzle) {
+    this.puzzleSequence = [puzzle.start_movie.id];
+    this.puzzleService.getMovieCrew(puzzle.end_movie.id).subscribe(
+      (movies: CastMember[]) => {
+        this.possibleEndings = movies.map(movie => movie.id);
+        this.loading = false;
+      },
+      () => {
+        this.error = true;
+        this.loading = false;
+      }
+    )
+  }
+
+  loadSolution(token: string) {
+    this.puzzleService.getSolution(token).subscribe(
+      solution => {
+        this.loadedSolution = solution.solution;
+        this.loading = false;
+      },
+      () => {
+        this.error = true;
+        this.loading = false;
+      }
+    )
   }
 
   async add(id: number) {
@@ -78,7 +94,7 @@ export class PuzzleComponent implements OnChanges {
       this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise()
       this.metrics = await this.puzzleService.getMetrics().toPromise();
       this.showCongratulations();
-      this.localStorageService.addSolution(this.solvedSolution.token);
+      this.localStorageService.addSolution(this.puzzle.id, this.solvedSolution.token);
     }
     this.scrollToEnd();
   }

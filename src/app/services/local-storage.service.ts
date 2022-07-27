@@ -14,16 +14,23 @@ export class LocalStorageService {
     localStorage.setItem('seen-instructions', JSON.stringify(true));
   }
 
-  public addSolution(token: string) {
+  public addSolution(puzzleId: number, token: string) {
     let solutions = localStorage.getItem('solutions');
     let solutionsDict = solutions ? JSON.parse(solutions) : {};
-    let today = new Date().toISOString().slice(0, 10);
-    solutionsDict[today] = token;
+    solutionsDict[puzzleId] = token;
     localStorage.setItem('solutions', JSON.stringify(solutionsDict));
   }
 
   public get solutions() {
     let data = localStorage.getItem('solutions');
     return data ? JSON.parse(data) : {};
+  }
+
+  public hasSolved(puzzleId: number) {
+    return Boolean(this.solutions[puzzleId]);
+  }
+
+  public getSolution(puzzleId: number) {
+    return this.solutions[puzzleId];
   }
 }
