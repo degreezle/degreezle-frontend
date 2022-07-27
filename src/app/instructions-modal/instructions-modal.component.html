@@ -6,9 +6,9 @@
 
   <p class="example-solution">
     <img class="example-solution" src="assets/examplesolution.png">
-    e.g. <strong>Nude Tuesday</strong> stars <strong>Damon Herriman</strong> who played Charles Manson in 
-    <strong>Once Upon a Time in Hollywood...</strong> which was directed by <strong>Quentin Tarantino</strong> 
-    who wrote <strong>True Romance</strong> which was directed by <strong>Tony Scott</strong> who also directed 
+    e.g. <strong>Nude Tuesday</strong> stars <strong>Damon Herriman</strong> who played Charles Manson in
+    <strong>Once Upon a Time in Hollywood...</strong> which was directed by <strong>Quentin Tarantino</strong>
+    who wrote <strong>True Romance</strong> which was directed by <strong>Tony Scott</strong> who also directed
     <strong>Top Gun</strong>!
   </p>
 </mat-dialog-content>
@@ -16,7 +16,7 @@
   <button mat-stroked-button aria-label="our data" [mat-dialog-close]="true" routerLink="/our-data">
     about our data
   </button>
-  <button mat-stroked-button aria-label="understood instructions" [mat-dialog-close]="true" cdkFocusInitial>
+  <button mat-stroked-button aria-label="understood instructions" [mat-dialog-close]="true" cdkFocusInitial (click)="seenInstructions()">
     i'm ready to film in the gaps
   </button>
 </mat-dialog-actions>

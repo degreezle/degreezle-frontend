@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CastMember, Metrics, SolutionResponse, StartPuzzle } from 'src/models';
 import { PuzzleService } from '../services/puzzle-service.service';
 import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solution-metrics-modal.component';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-puzzle',
@@ -25,7 +26,7 @@ export class PuzzleComponent implements OnChanges {
   error = false;
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
 
-  constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog) {
+  constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) {
     puzzleService.puzzle$.subscribe(
       puzzle => {
         if (puzzle.id) {
@@ -35,20 +36,20 @@ export class PuzzleComponent implements OnChanges {
             (movies: CastMember[]) => {
               this.possibleEndings = movies.map(movie => movie.id);
               this.loading = false;
-            }, 
+            },
             () => {
               this.error = true;
               this.loading = false;
             }
           )
         }
-      }, 
+      },
       () => {
         this.error = true;
         this.loading = false;
       }
     );
-    
+
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -57,12 +58,12 @@ export class PuzzleComponent implements OnChanges {
         solution => {
           this.loadedSolution = solution.solution;
           this.loading = false;
-        }, 
+        },
         () => {
           this.error = true;
           this.loading = false;
         }
-      )  
+      )
     }
     if (changes.puzzleId) {
       this.loading = true;
@@ -74,31 +75,32 @@ export class PuzzleComponent implements OnChanges {
     this.puzzleSequence.push(id);
     this.solved = this.hasFoundSolution();
     if (this.solved && this.puzzle) {
-      this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise() 
+      this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise()
       this.metrics = await this.puzzleService.getMetrics().toPromise();
       this.showCongratulations();
-    } 
+      this.localStorageService.addSolution(this.solvedSolution.token);
+    }
     this.scrollToEnd();
   }
 
   scrollToEnd() {
-    setTimeout(() => {   
-      if (this.afterEndMovie) {                    
-      this.afterEndMovie.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      if (this.afterEndMovie) {
+        this.afterEndMovie.nativeElement.scrollIntoView({ behavior: 'smooth' });
       }
     }, 300);
   }
 
   showCongratulations() {
     this.dialog.open(SolutionMetricsModalComponent, {
-      backdropClass: 'modal-backdrop', 
-      closeOnNavigation: true, 
-      restoreFocus: false, 
+      backdropClass: 'modal-backdrop',
+      closeOnNavigation: true,
+      restoreFocus: false,
       autoFocus: true,
-      maxWidth: 500, 
+      maxWidth: 500,
       data: {
-        puzzle: this.puzzle, 
-        solution: this.solvedSolution, 
+        puzzle: this.puzzle,
+        solution: this.solvedSolution,
         metrics: this.metrics,
       }
     });
@@ -124,6 +126,6 @@ export class PuzzleComponent implements OnChanges {
     }
   }
 
-  
+
 
 }

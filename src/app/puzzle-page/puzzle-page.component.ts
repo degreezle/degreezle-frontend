@@ -13,21 +13,21 @@ export class PuzzlePageComponent implements OnInit {
   token: string | null = null;
   puzzleId: string | null = null;
 
-  constructor(public route: ActivatedRoute, public dialog: MatDialog  ) { }
+  constructor(public route: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       this.token = paramMap.get('token');
       this.puzzleId = paramMap.get('puzzleId');
-    }); 
-    // this.showInstructions();
+    });
+    this.showInstructions();
   }
 
   showInstructions() {
     this.dialog.open(InstructionsModalComponent, {
-      backdropClass: 'modal-backdrop', 
-      closeOnNavigation: true, 
-      maxWidth: 500, 
+      backdropClass: 'modal-backdrop',
+      closeOnNavigation: true,
+      maxWidth: 500,
     });
   }
 }
