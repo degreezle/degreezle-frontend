@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +24,7 @@ import { CastMemberDisplayComponent } from './cast-member-display/cast-member-di
 import { InstructionsModalComponent } from './instructions-modal/instructions-modal.component';
 import { OurDataPageComponent } from './our-data-page/our-data-page.component';
 import { SolutionMetricsModalComponent } from './solution-metrics-modal/solution-metrics-modal.component';
+import { GTM_ID } from 'src/constants';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,9 @@ import { SolutionMetricsModalComponent } from './solution-metrics-modal/solution
     MatDialogModule,
     MatToolbarModule, 
     SwiperModule,
+    GoogleTagManagerModule.forRoot({
+      id: GTM_ID,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

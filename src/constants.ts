@@ -9,3 +9,5 @@ export const ENDPOINTS = {
   solution: prefix + 'solution/',
   metrics: prefix + 'metrics/'
 }
+
+export const GTM_ID = 'GTM-M2LPM6H'; 
