@@ -1,40 +1,7 @@
-
-@import "~swiper/css";
-@import "~swiper/css/effect-cards";
-
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
-
-/* Swiper */
-
-
-
-.swiper {
-  width: 140px;
-  height: 140px;
-  padding: 20px;
-
-  img {
-    width: 140px;
-  }
-
-  .cast-name {
-    position: fixed;
-    margin: 140px;
-  }
-}
-
-.swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
-}
 
 .form-full-width {
   padding: 20px;
@@ -57,4 +24,19 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
   border-radius: 16px;
   background-color:rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
+}
+
+.mat-dialog-actions {
+  justify-content: space-between;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .mat-dialog-actions {
+      flex-wrap: nowrap !important;
+  }
+
+}
+.mat-button-focus-overlay {
+  background: pink;
 }
