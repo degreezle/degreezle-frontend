@@ -1,7 +1,7 @@
 <div [class.poster]="myControl.value" (click)="clicked()">
   <form *ngIf="!hasChosen()" class="form-full-width">
     <mat-form-field class="input-full-width" >
-      <mat-label>Pick a film <mat-icon>movie</mat-icon></mat-label>
+      <mat-label>Select a film <mat-icon>movie</mat-icon></mat-label>
       <input type="text"
              #input
              placeholder="Start typing"
