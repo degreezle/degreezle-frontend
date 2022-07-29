@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -15,8 +15,10 @@ export class CastMemberSelectorComponent implements OnChanges {
 
   @Output() chosen: EventEmitter<number> = new EventEmitter<number>();
   @Input() movieId: number | undefined = undefined;
+  @Input() shouldOpenOnInit: boolean = true;
 
   dontOpenKeyboard = true;
+  isMobileView = false;
 
   myControl = new FormControl('');
 
@@ -25,15 +27,28 @@ export class CastMemberSelectorComponent implements OnChanges {
 
   @ViewChild('input') inputField: ElementRef | undefined;
 
-  constructor(public puzzleService: PuzzleService) {}
+  constructor(public puzzleService: PuzzleService, private cdref: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
-
+    
     this.myControl.valueChanges.subscribe(v => { if (this.hasChosen()) this.chosen.emit(this.myControl.value.id); });
+    this.isMobileView = window.innerWidth <= 600;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isMobileView = window.innerWidth <= 600;
+  }
+
+  ngAfterViewInit() {
+    if (this.shouldOpenOnInit && !this.isMobileView) {
+      this.inputField?.nativeElement.focus();
+      this.cdref.detectChanges();
+    }
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -44,7 +59,7 @@ export class CastMemberSelectorComponent implements OnChanges {
   }
 
   clicked() {
-    if (this.dontOpenKeyboard) {
+    if (this.dontOpenKeyboard && this.isMobileView) {
       this.inputField?.nativeElement.blur();
       this.dontOpenKeyboard = false;
     }

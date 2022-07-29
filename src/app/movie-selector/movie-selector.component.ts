@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -15,8 +15,10 @@ export class MovieSelectorComponent implements OnChanges {
 
   @Output() chosen: EventEmitter<number> = new EventEmitter<number>();
   @Input() castMemberId: number | undefined = undefined;
+  @Input() shouldOpenOnInit: boolean = true;
 
   dontOpenKeyboard = true;
+  isMobileView = false;
   @ViewChild('input') inputField: ElementRef | undefined;
 
   myControl = new FormControl('');
@@ -24,7 +26,7 @@ export class MovieSelectorComponent implements OnChanges {
   options: Movie[] = [];
   filteredOptions: Observable<Movie[]> | undefined;
 
-  constructor(public puzzleService: PuzzleService) {}
+  constructor(public puzzleService: PuzzleService, private cdref: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -33,6 +35,19 @@ export class MovieSelectorComponent implements OnChanges {
     );
 
     this.myControl.valueChanges.subscribe(v => { if (this.hasChosen()) this.chosen.emit(this.myControl.value.id); });
+    this.isMobileView = window.innerWidth <= 600;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isMobileView = window.innerWidth <= 600;
+  }
+
+  ngAfterViewInit() {
+    if (this.shouldOpenOnInit && !this.isMobileView) {
+      this.inputField?.nativeElement.focus();
+      this.cdref.detectChanges();
+    }
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -43,7 +58,7 @@ export class MovieSelectorComponent implements OnChanges {
   }
 
   clicked() {
-    if (this.dontOpenKeyboard) {
+    if (this.dontOpenKeyboard && this.isMobileView) {
       this.inputField?.nativeElement.blur();
       this.dontOpenKeyboard = false;
     }

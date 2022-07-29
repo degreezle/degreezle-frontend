@@ -1,4 +1,4 @@
 <a href="https://themoviedb.org/person/{{item.id}}" target="_blank" *ngIf="item" class="cast" title="{{item.name}}">
-    <img *ngIf="item.profile_path" src="https://image.tmdb.org/t/p/w500{{item.profile_path}}" width="150px">
-    <img *ngIf="!item.profile_path" src="assets/unknown-person.svg" width="150px">
+    <img *ngIf="item.profile_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{item.profile_path}}" width="150px">
+    <img *ngIf="!item.profile_path" loading="lazy" src="assets/unknown-person.svg" width="150px">
 </a>
