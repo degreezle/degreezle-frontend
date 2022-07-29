@@ -9,12 +9,8 @@ import { LocalStorageService } from '../services/local-storage.service';
 })
 export class InstructionsModalComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<InstructionsModalComponent>, public localStorageService: LocalStorageService) { }
+  constructor(public dialogRef: MatDialogRef<InstructionsModalComponent>) { }
 
   ngOnInit(): void {
-  }
-
-  seenInstructions() {
-    this.localStorageService.setSeenInstructions();
   }
 }

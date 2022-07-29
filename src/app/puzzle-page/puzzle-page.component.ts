@@ -23,6 +23,7 @@ export class PuzzlePageComponent implements OnInit {
     });
     if (!this.localStorageService.hasSeenInstructions) {
       this.showInstructions();
+      this.localStorageService.setSeenInstructions();
     }
   }
 
