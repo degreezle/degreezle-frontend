@@ -34,4 +34,10 @@ export class PuzzlePageComponent implements OnInit {
       maxWidth: 500,
     });
   }
+
+  openKofi() {
+    window.open(
+      "https://ko-fi.com/filminthegaps", "_blank"
+    );
+  }
 }
