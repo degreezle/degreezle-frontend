@@ -1,21 +1,29 @@
 <mat-dialog-content *ngIf="data.solution">
-  <h2>nice one! 🎉</h2>
-  <p>you connected <strong>{{data.puzzle.start_movie.title}}</strong> to <strong>{{data.puzzle.end_movie.title}}</strong> in {{data.solution.solution.length}} steps 🥳</p>
-  <p>{{data.solution.count}} people found the <strong>same</strong> solution as you, {{data.metrics.num_solved}} people have found <strong>some</strong> solution 📈</p>
-  <p>the <strong>shortest</strong> solution found so far was {{data.metrics.shortest_solution}} steps long 😳</p>
-  <p>the <strong>average</strong> number of steps taken to solve was {{data.metrics.average_steps | number: '1.0-1' }} 👌</p>
-  <p>the <strong>median</strong> number of steps taken to solve was {{data.metrics.median_steps | number: '1.0-1' }} 🤔</p>
-  <p>copy your result to the clipboard with the button below. it'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>
-  
+  <h2>🎉 nice one! 🎉</h2>
+  <p>you connected <strong>{{data.puzzle.start_movie.title}}</strong> to <strong>{{data.puzzle.end_movie.title}}</strong> in {{data.solution.solution.length - 1}} steps 🥳</p>
+  <ul>
+    <li *ngIf="data.metrics.num_solved === 1; else elseBlock1">you're the only person who has filmed in the gaps so far today</li>
+    <ng-template #elseBlock1>
+      <li>you're one of {{data.metrics.num_solved}} people who have filmed in the gaps today</li>
+      <li *ngIf="!data.solution.count; else elseBlock2">you're the only person who has found this solution</li>
+      <ng-template #elseBlock2>
+        <li>{{data.solution.count}} people have found the same solution as you</li>
+      </ng-template>
+      <li *ngIf="data.solution.token !== data.solution.shortest_solution"><a href="https://degreezle-test.firebaseapp.com/solution/{{data.solution.shortest_solution}}">the shortest solution</a> found so far was {{data.metrics.shortest_solution}} steps long</li>
+      <li *ngIf="data.solution.token !== data.solution.longest_solution"><a href="https://degreezle-test.firebaseapp.com/solution/{{data.solution.longest_solution}}">the longest solution</a> found so far was {{data.metrics.shortest_solution}} steps long</li>
+      <li>the average number of steps taken to solve was {{data.metrics.average_steps | number: '1.0-0' }}</li>
+      <li>the median number of steps taken to solve was {{data.metrics.median_steps }}</li>
+    </ng-template>
+</ul>
+<p>copy your result to the clipboard with the button below. it'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>
   <!-- <p>your average solution length is D steps 🧮</p> -->
   <!-- <p>you’ve solved E puzzles in a row 🀹</p> -->
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-stroked-button aria-label="copy result" (click)="copySolution()">
+<mat-dialog-actions>
+  <button mat-stroked-button class="primary" aria-label="copy result" (click)="copySolution()" cdkFocusInitial>
     copy solution
   </button>
-  <button mat-stroked-button aria-label="understood message" [mat-dialog-close]="true" cdkFocusInitial>
+  <button mat-stroked-button aria-label="understood message" [mat-dialog-close]="true">
     see you tomorrow!
   </button>
 </mat-dialog-actions>
-  

@@ -1,7 +1,7 @@
 
 .film {
-    width: 140px;
-    height: 200px;
+    width: 210px;
+    height: 300px;
     border-radius: 5px;
     border: rgb(175, 172, 172) 1px solid;
     background-color: rgb(218, 216, 216);
@@ -21,6 +21,11 @@
     &.typing {
       width: 340px;
     }
-  
-  
+}
+
+@media only screen and (max-width: 600px) {
+  .film {
+    width: 140px;
+    height: 200px;
   }
+}

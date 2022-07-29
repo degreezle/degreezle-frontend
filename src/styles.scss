@@ -22,12 +22,13 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
 
 .mat-dialog-container {
   border-radius: 16px;
-  background-color:rgba(255, 255, 255, 0.8);
+  background-color:rgba(255, 255, 255, 1);
   backdrop-filter: blur(10px);
 }
 
 .mat-dialog-actions {
   justify-content: space-between;
+  margin-bottom: -16px !important;
 }
 
 
@@ -39,4 +40,12 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
 }
 .mat-button-focus-overlay {
   background: pink;
+}
+.mat-stroked-button {
+  border-color:rgba(0, 0, 0, 1) !important;
+}
+
+.primary {
+  border-color: #D52A9F !important;
+  color:#D52A9F;
 }

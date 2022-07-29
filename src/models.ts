@@ -33,6 +33,8 @@ export interface Movie {
   token: string;
   solution: (Movie | CastMember)[];
   count?: number;
+  shortest_solution: string;
+  longest_solution: string;
 }
 
 /**
@@ -41,6 +43,7 @@ export interface Movie {
  export interface Metrics {
   num_solved: number;
   shortest_solution: number;
+  longest_solution: number;
   average_steps: number;
   median_steps: number;
 }
