@@ -9,8 +9,8 @@
       <ng-template #elseBlock2>
         <li>{{data.solution.count}} people have found the same solution as you</li>
       </ng-template>
-      <li *ngIf="data.solution.token !== data.solution.shortest_solution"><a href="https://degreezle-test.firebaseapp.com/solution/{{data.solution.shortest_solution}}">the shortest solution</a> found so far was {{data.metrics.shortest_solution}} steps long</li>
-      <li *ngIf="data.solution.token !== data.solution.longest_solution"><a href="https://degreezle-test.firebaseapp.com/solution/{{data.solution.longest_solution}}">the longest solution</a> found so far was {{data.metrics.longest_solution}} steps long</li>
+      <li *ngIf="data.solution.token !== data.solution.shortest_solution"><a href="https://degreezle-test.firebaseapp.com/solution/{{data.solution.shortest_solution}}" target="_blank">the shortest solution</a> found so far was {{data.metrics.shortest_solution}} steps long</li>
+      <li *ngIf="data.solution.token !== data.solution.longest_solution"><a href="https://degreezle-test.firebaseapp.com/solution/{{data.solution.longest_solution}}" target="_blank">the longest solution</a> found so far was {{data.metrics.longest_solution}} steps long</li>
       <li>the average number of steps taken to solve was {{data.metrics.average_steps | number: '1.0-0' }}</li>
       <li>the median number of steps taken to solve was {{data.metrics.median_steps }}</li>
     </ng-template>
