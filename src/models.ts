@@ -32,7 +32,7 @@ export interface Movie {
   puzzle: number;
   token: string;
   solution: (Movie | CastMember)[];
-  count?: number;
+  count: number;
   shortest_solution: string;
   longest_solution: string;
 }
