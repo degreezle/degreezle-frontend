@@ -3,6 +3,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Metrics, SolutionResponse, StartPuzzle } from 'src/models';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-solution-metrics-modal',
@@ -17,7 +18,8 @@ export class SolutionMetricsModalComponent implements OnInit {
       solution: SolutionResponse, 
       metrics: Metrics
     }, 
-    private clipboard: Clipboard) { }
+    private clipboard: Clipboard, 
+    public localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
   }

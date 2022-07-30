@@ -104,8 +104,8 @@ export class PuzzleComponent implements OnChanges {
   async postSolutionAndShowModal() {
     if (this.solved && this.puzzle) {
       await this.postSolutionAndGetMetrics();
+      this.calculateAndStoreSolutionMetrics();
       this.showCongratulations();
-      this.storeSolutionMetrics();
       this.changeURL();
       
     }
@@ -117,7 +117,7 @@ export class PuzzleComponent implements OnChanges {
     }
   }
 
-  storeSolutionMetrics() {
+  calculateAndStoreSolutionMetrics() {
     if (this.puzzle && this.solvedSolution) {
       this.localStorageService.addSolution(
         this.puzzle, 

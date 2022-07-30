@@ -13,6 +13,7 @@
       <li *ngIf="data.solution.token !== data.solution.longest_solution"><a href="https://degreezle-test.firebaseapp.com/solution/{{data.solution.longest_solution}}" target="_blank">the longest solution</a> found so far was {{data.metrics.longest_solution}} steps long</li>
       <li>the average number of steps taken to solve was {{data.metrics.average_steps | number: '1.0-0' }}</li>
       <li>the median number of steps taken to solve was {{data.metrics.median_steps }}</li>
+      <li>your current streak is {{ localStorageService.currentStreak }} and your max is {{ localStorageService.maxStreak }}</li>
     </ng-template>
 </ul>
 <p>copy your result to the clipboard with the button below. it'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>

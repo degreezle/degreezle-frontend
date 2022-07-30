@@ -65,7 +65,6 @@ export class LocalStorageService {
     // Reset or increase streak
     if (this.shouldResetStreak(todays_date_string)) {
       currentStreak = 1;
-      console.log('Reseting')
     } else {
       currentStreak += 1;
     }
@@ -101,5 +100,13 @@ export class LocalStorageService {
 
   public getSolution(puzzleId: number) {
     return this.solutions[puzzleId];
+  }
+
+  public get currentStreak() {
+    return this.getData().current_streak ?? 0;
+  }
+
+  public get maxStreak() {
+    return this.getData().max_streak ?? 0;
   }
 }
