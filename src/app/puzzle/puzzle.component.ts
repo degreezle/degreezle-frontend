@@ -5,6 +5,7 @@ import { CastMember, Metrics, SolutionResponse, StartPuzzle } from 'src/models';
 import { PuzzleService } from '../services/puzzle-service.service';
 import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solution-metrics-modal.component';
 import { LocalStorageService } from '../services/local-storage.service';
+import { Location } from '@angular/common'; 
 
 @Component({
   selector: 'app-puzzle',
@@ -26,7 +27,13 @@ export class PuzzleComponent implements OnChanges {
   error = false;
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
 
-  constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) {
+  constructor(
+    public puzzleService: PuzzleService, 
+    public route: ActivatedRoute, 
+    public dialog: MatDialog, 
+    public localStorageService: LocalStorageService, 
+    public location: Location,
+  ) {
     puzzleService.puzzle$.subscribe(
       puzzle => {
         if (puzzle.id && !this.token) {
@@ -95,6 +102,7 @@ export class PuzzleComponent implements OnChanges {
       this.metrics = await this.puzzleService.getMetrics().toPromise();
       this.showCongratulations();
       this.localStorageService.addSolution(this.puzzle.id, this.solvedSolution.token);
+      this.location.replaceState("/solution/" + this.solvedSolution.token);
     }
     this.scrollToEnd();
   }
