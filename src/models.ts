@@ -23,6 +23,7 @@ export interface Movie {
   id: number;
   start_movie: Movie;
   end_movie: Movie;
+  local_datetime?: string;
 }
 
 /**

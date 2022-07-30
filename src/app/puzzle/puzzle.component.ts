@@ -97,14 +97,43 @@ export class PuzzleComponent implements OnChanges {
   async add(id: number) {
     this.puzzleSequence.push(id);
     this.solved = this.hasFoundSolution();
+    this.postSolutionAndShowModal();
+    this.scrollToEnd();
+  }
+
+  async postSolutionAndShowModal() {
     if (this.solved && this.puzzle) {
-      this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise()
-      this.metrics = await this.puzzleService.getMetrics().toPromise();
+      await this.postSolutionAndGetMetrics();
       this.showCongratulations();
-      this.localStorageService.addSolution(this.puzzle.id, this.solvedSolution.token, this.solvedSolution.solution.length);
+      this.storeSolutionMetrics();
+      this.changeURL();
+      
+    }
+  }
+
+  changeURL() {
+    if (this.solvedSolution) {
       this.location.replaceState("/solution/" + this.solvedSolution.token);
     }
-    this.scrollToEnd();
+  }
+
+  storeSolutionMetrics() {
+    if (this.puzzle && this.solvedSolution) {
+      this.localStorageService.addSolution(
+        this.puzzle, 
+        this.solvedSolution
+      );
+      if (this.puzzle.local_datetime) {
+        this.localStorageService.addToStreak(this.puzzle.local_datetime)
+      }
+    }
+  }
+
+  async postSolutionAndGetMetrics() {
+    if (this.puzzle) {
+      this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise()
+      this.metrics = await this.puzzleService.getMetrics().toPromise();
+    }
   }
 
   scrollToEnd() {

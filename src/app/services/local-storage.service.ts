@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageV1_0_0 } from 'src/models';
+import { SolutionResponse, StartPuzzle, StorageV1_0_0 } from 'src/models';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class LocalStorageService {
     data[key] = value;
     localStorage.setItem('data', JSON.stringify(data));
   }
-  
+
   public get hasSeenInstructions() {
     this.checkVersion();
     let data: StorageV1_0_0 = this.getData();
@@ -50,17 +50,49 @@ export class LocalStorageService {
     this.setData('seen_instructions', true);
   }
 
-  public addSolution(puzzleId: number, token: string, length: number) {
-    let solutions = this.getData().solutions || {};
-    solutions[puzzleId] = {
-      token: token, 
-      length: length
+  public addSolution(puzzle: StartPuzzle, solution: SolutionResponse) {
+    let solutions = this.getData().solutions ?? {};
+    solutions[puzzle.id] = {
+      token: solution.token, 
+      length: solution.solution.length
     };
     this.setData('solutions', solutions);
   }
 
+  public addToStreak(todays_date_string: string) {
+    let currentStreak = this.getData().current_streak ?? 0;
+    let maxStreak = this.getData().max_streak ?? 0;
+    // Reset or increase streak
+    if (this.shouldResetStreak(todays_date_string)) {
+      currentStreak = 1;
+      console.log('Reseting')
+    } else {
+      currentStreak += 1;
+    }
+    // Check current streak is the max
+    maxStreak = Math.max(currentStreak, maxStreak);
+    // Store all
+    this.setData('current_streak', currentStreak);
+    this.setData('max_streak', maxStreak);
+    this.setData('last_solution_date', todays_date_string);
+  }
+
+  public shouldResetStreak(todays_date_string: string) {
+    let lastSolutionDateString = this.getData().last_solution_date;
+
+    if (lastSolutionDateString) {
+      let lastSolutionDate = new Date(lastSolutionDateString);    
+      let yesterday = new Date(todays_date_string);
+      yesterday.setDate(yesterday.getDate() - 1); // yesterday = today - 1
+      console.log(yesterday.toDateString() !== lastSolutionDate.toDateString(), yesterday.toDateString(), lastSolutionDate.toDateString());
+      return yesterday.toDateString() !== lastSolutionDate.toDateString();
+    } else {
+      return true;
+    }
+  }
+
   public get solutions() {
-    return this.getData().solutions || {};
+    return this.getData().solutions ?? {};
   }
 
   public hasSolved(puzzleId: number) {

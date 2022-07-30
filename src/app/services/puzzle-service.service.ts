@@ -21,7 +21,7 @@ export class PuzzleService {
       id: 0, 
       poster_path: '', 
       title: '', 
-    }
+    },
   });
 
   constructor(private http: HttpClient) { }
