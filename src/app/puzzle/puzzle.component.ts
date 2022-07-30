@@ -29,10 +29,10 @@ export class PuzzleComponent implements OnChanges {
   constructor(public puzzleService: PuzzleService, public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) {
     puzzleService.puzzle$.subscribe(
       puzzle => {
-        if (puzzle.id) {
+        if (puzzle.id && !this.token) {
           this.puzzle = puzzle;
 
-          if (this.localStorageService.hasSolved(this.puzzle.id) && !this.token) {
+          if (this.localStorageService.hasSolved(this.puzzle.id)) {
             this.token = this.localStorageService.getSolution(this.puzzle.id);
             if (this.token) {
               this.loadSolution(this.token);
