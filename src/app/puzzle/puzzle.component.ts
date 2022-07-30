@@ -40,7 +40,7 @@ export class PuzzleComponent implements OnChanges {
           this.puzzle = puzzle;
 
           if (this.localStorageService.hasSolved(this.puzzle.id)) {
-            this.token = this.localStorageService.getSolution(this.puzzle.id);
+            this.token = this.localStorageService.getSolution(this.puzzle.id).token;
             if (this.token) {
               this.loadSolution(this.token);
             }
@@ -101,7 +101,7 @@ export class PuzzleComponent implements OnChanges {
       this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise()
       this.metrics = await this.puzzleService.getMetrics().toPromise();
       this.showCongratulations();
-      this.localStorageService.addSolution(this.puzzle.id, this.solvedSolution.token);
+      this.localStorageService.addSolution(this.puzzle.id, this.solvedSolution.token, this.solvedSolution.solution.length);
       this.location.replaceState("/solution/" + this.solvedSolution.token);
     }
     this.scrollToEnd();

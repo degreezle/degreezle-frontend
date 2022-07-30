@@ -47,3 +47,25 @@ export interface Movie {
   average_steps: number;
   median_steps: number;
 }
+
+/**
+ * Storage model V1.0.0
+ */
+ export interface StorageV1_0_0 {
+  seen_instructions?: boolean;
+  solutions?: {
+      [puzzleId: number]: StorageSolutionV1_0_0;
+  };
+  current_streak?: number;
+  max_streak?: number;
+  last_solution_date?: string;
+  version: string;
+}
+
+/**
+ * Storage solution model V1.0.0
+ */
+export interface StorageSolutionV1_0_0 {
+  token: string;
+  length: number;
+}
