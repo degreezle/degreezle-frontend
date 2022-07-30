@@ -9,7 +9,6 @@
             <app-cast-member-selector *ngIf="showMovieSelector(i)" [shouldOpenOnInit]="i!==0" [movieId]="id" (chosen)="add($event)"></app-cast-member-selector>
             <app-movie-selector *ngIf="showCastMemberSelector(i)" [shouldOpenOnInit]="i!==0" [castMemberId]="id" (chosen)="add($event)"></app-movie-selector>
         </div>
-        <!-- <div *ngIf="solved">Yay! Share your or view your solution: <a *ngIf="solvedSolution?.token" href="https://degreezle-test.firebaseapp.com/solution/{{solvedSolution?.token}}">{{solvedSolution?.token}}</a></div> -->
         <app-movie-display [item]="puzzle?.end_movie"></app-movie-display>
         <div #afterEndMovie></div>
     </div>

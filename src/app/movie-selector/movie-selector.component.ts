@@ -43,12 +43,12 @@ export class MovieSelectorComponent implements OnChanges {
     this.isMobileView = window.innerWidth <= 600;
   }
 
-  ngAfterViewInit() {
-    if (this.shouldOpenOnInit && !this.isMobileView) {
-      this.inputField?.nativeElement.focus();
-      this.cdref.detectChanges();
-    }
-  }
+  // ngAfterViewInit() {
+  //   if (this.shouldOpenOnInit && !this.isMobileView) {
+  //     this.inputField?.nativeElement.focus();
+  //     this.cdref.detectChanges();
+  //   }
+  // }
 
   async ngOnChanges(changes: SimpleChanges) {
     if (changes.castMemberId && this.castMemberId) {
