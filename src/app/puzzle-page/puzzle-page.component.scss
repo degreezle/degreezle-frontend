@@ -16,4 +16,8 @@
     width: fit-content;
     height: fit-content;
     background-color: #f0f0f0;
+
+    &.dark-mode {
+        background-color: #363333;
+    }
 }

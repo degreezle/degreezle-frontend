@@ -2,6 +2,10 @@
 <mat-toolbar class="nav-bar">
   <span class="bar-spacer"></span>
 
+  <button mat-icon-button aria-label="Dark/light mode" (click)="darkMode = !darkMode">
+    <mat-icon>lightbulb_outline</mat-icon>
+  </button>
+
   <button mat-icon-button aria-label="Buy us a coffee" (click)="openKofi()">
     <mat-icon>favorite_outline</mat-icon>
   </button>
@@ -11,7 +15,7 @@
   </button>
 </mat-toolbar>
 
-<div class="center-puzzle">
+<div class="center-puzzle" [class.dark-mode]="darkMode">
   <div class="bar-spacer"></div>
   <app-puzzle [token]="token" [puzzleId]="puzzleId"></app-puzzle>
   <div class="bar-spacer"></div>

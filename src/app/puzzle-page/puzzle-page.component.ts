@@ -13,6 +13,7 @@ export class PuzzlePageComponent implements OnInit {
 
   token: string | null = null;
   puzzleId: string | null = null;
+  darkMode = false;
 
   constructor(public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) { }
 

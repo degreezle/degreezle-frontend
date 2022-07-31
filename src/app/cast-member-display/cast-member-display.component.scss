@@ -25,11 +25,20 @@
   }
 }
 
-
-* {
-  transition: all 0.3s ease-out;
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
+.view-text {
+  opacity: 0;
+  position: absolute;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 14px;
+  bottom: 0;
+  padding: 20px;
+}
 
 .go-corner {
   display: flex;
@@ -55,10 +64,9 @@
 .card {
   display: block;
   position: relative;
-  background-color: #ffffff;
   border-radius: 5px;
   overflow: hidden;
-  border: 2px solid #cccccc;
+  border: 2px solid transparent;
   
   .go-corner {
     height: 100%;
@@ -80,6 +88,7 @@
 
   &:hover {
     border: 2px solid #D52A9F;
+    
   }
   
   h3 {margin-top: 8px;}
@@ -92,5 +101,19 @@
   }
   .go-arrow {
     opacity: 1;
+  }
+  .view-text {
+    opacity: 1;
+    animation: fadein 1s;
+  }
+  .cast:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, black 100%);
+    animation: fadein 1s;
   }
 }
