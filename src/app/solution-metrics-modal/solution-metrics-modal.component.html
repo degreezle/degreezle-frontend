@@ -23,10 +23,10 @@
 
 <mat-dialog-actions>
   <button mat-stroked-button class="twitter" aria-label="tweet" (click)="openTwitterLink()">
-    post on twitter
+    <mat-icon>share</mat-icon> tweet that
   </button>
   <button mat-stroked-button class="primary" aria-label="copy result" (click)="copySolution()" cdkFocusInitial>
-    copy solution
+    <mat-icon>content_copy</mat-icon> copy solution 
   </button>
   <button mat-stroked-button aria-label="understood message" [mat-dialog-close]="true">
     see you tomorrow!
