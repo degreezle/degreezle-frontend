@@ -50,6 +50,15 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
   color:#D52A9F;
 }
 
+.twitter {
+  &.mat-button-focus-overlay {
+    background: rgb(192, 227, 255);
+  }
+  
+  border-color: #2a96d5 !important;
+  color:#2a96d5;
+}
+
 .mat-focused .mat-form-field-label {
   /*change color of label*/
   color: #D52A9F !important;
