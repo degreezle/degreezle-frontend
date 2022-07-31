@@ -10,9 +10,30 @@ export class CastMemberDisplayComponent implements OnInit {
 
   @Input() item: CastMember | null | undefined = null;
 
+  touchedAlready = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  touched() {
+    if (this.touchedAlready && this.item) {
+      window.open(
+        "https://themoviedb.org/person/" + this.item.id , "_blank"
+      );
+      this.touchedAlready = false;
+    } else {
+      this.touchedAlready = true;
+    }
+  }
+
+  clicked() {
+    if (this.item) {
+      window.open(
+        "https://thepersondb.org/movie/" + this.item.id , "_blank"
+      );
+    }
   }
 
 }
