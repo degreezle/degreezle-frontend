@@ -3,9 +3,6 @@
     width: 210px;
     height: 300px;
     border-radius: 5px;
-    border: rgb(175, 172, 172) 1px solid;
-    background-color: rgb(218, 216, 216);
-    // box-shadow: 0 1px 3px rgb(0 0 0 / 35%);
     font-size: 25px;
     display: flex;
     justify-content: center;
@@ -17,15 +14,80 @@
       min-width: 100%;
       min-height: 100%;
     }
-  
-    &.typing {
-      width: 340px;
-    }
 }
 
 @media only screen and (max-width: 600px) {
   .film {
     width: 140px;
     height: 200px;
+  }
+}
+
+* {
+  transition: all 0.3s ease-out;
+}
+
+
+.go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background-color: #D52A9F;
+  border-radius: 0 5px 0 32px;
+}
+
+.go-arrow {
+  margin-top: -2px;
+  margin-right: -6px;
+  color: white;
+  font-family: courier, sans;
+}
+
+.card {
+  display: block;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid #cccccc;
+  
+  .go-corner {
+    height: 100%;
+    width: 20px;
+    padding-right: 9px;
+    border-radius: 0;
+    transform: skew(4deg);
+    margin-right: -55px;
+    align-items: start;
+    background-image: linear-gradient(-45deg, #8F479A 1%, #D52A9F 100%);
+  }
+  
+  .go-arrow {
+    transform: skew(-deg);
+    margin-left: -1px;
+    margin-top: 9px;
+    opacity: 0;
+  }
+
+  &:hover {
+    border: 2px solid #D52A9F;
+  }
+  
+  h3 {margin-top: 8px;}
+}
+
+
+.card:hover {
+  .go-corner {
+    margin-right: -12px;
+  }
+  .go-arrow {
+    opacity: 1;
   }
 }

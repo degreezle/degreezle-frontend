@@ -49,3 +49,18 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
   border-color: #D52A9F !important;
   color:#D52A9F;
 }
+
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #D52A9F !important;
+ }
+
+// .mat-form-field-underline {
+//   /*change color of underline*/
+//   background-color: #D52A9F !important;
+// } 
+
+.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #D52A9F !important;
+}

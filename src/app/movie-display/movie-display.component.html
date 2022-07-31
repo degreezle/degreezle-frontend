@@ -1,4 +1,13 @@
-<a href="https://themoviedb.org/movie/{{item.id}}" target="_blank" *ngIf="item" class="film poster" title="{{item.title}}">
-    <img *ngIf="item.poster_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{item.poster_path}}">
-    <img *ngIf="!item.poster_path" loading="lazy" src="assets/unknown-film.svg">
-</a>
+
+
+<a *ngIf="item" class="card" href="https://themoviedb.org/movie/{{item.id}}" target="_blank"> 
+    <a class="film" title="{{item.title}}">
+        <img *ngIf="item.poster_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{item.poster_path}}">
+        <img *ngIf="!item.poster_path" loading="lazy" src="assets/unknown-film.svg">
+    </a>
+    <div class="go-corner">
+      <div class="go-arrow">
+        <mat-icon>open_in_new</mat-icon>
+      </div>
+    </div>
+  </a>
