@@ -20,7 +20,7 @@ export class CastMemberDisplayComponent implements OnInit {
   focused() {
     setTimeout(() => {
       this.touchedAlready = true;
-    }, 300);
+    }, 800);
     
   }
 
