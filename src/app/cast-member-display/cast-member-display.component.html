@@ -1,4 +1,4 @@
-<div class="wrapper" (click)="focused()" (mouseover)="focused()" (mouseleave)="leftFocus()">
+<div class="wrapper" (click)="focused()" (mouseover)="focused()" (mouseleave)="leftFocus()" (mouseleave)="leftFocus()">
   <a *ngIf="item" class="card" [attr.href]="touchedAlready ? 'https://themoviedb.org/person/' + item.id : null" [target]="touchedAlready ? '_blank' : null">
       <a class="cast" title="{{item.name}}">
           <img *ngIf="item.profile_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{item.profile_path}}" width="150px">
