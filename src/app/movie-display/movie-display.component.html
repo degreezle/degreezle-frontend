@@ -1,7 +1,7 @@
 
 
-<div class="wrapper">
-    <a *ngIf="item" class="card" href="https://themoviedb.org/movie/{{item.id}}" target="_blank"> 
+<div class="wrapper" (mouseover)="focused()" (mouseleave)="leftFocus()">
+  <a *ngIf="item" class="card" [attr.href]="touchedAlready ? 'https://themoviedb.org/movie/' + item.id : null" [target]="touchedAlready ? '_blank' : null"> 
     <a class="film" title="{{item.title}}">
         <img *ngIf="item.poster_path" loading="lazy" src="https://image.tmdb.org/t/p/w500{{item.poster_path}}">
         <img *ngIf="!item.poster_path" loading="lazy" src="assets/unknown-film.svg">

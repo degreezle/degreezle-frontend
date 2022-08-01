@@ -17,23 +17,15 @@ export class CastMemberDisplayComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  touched() {
-    if (this.touchedAlready && this.item) {
-      window.open(
-        "https://themoviedb.org/person/" + this.item.id , "_blank"
-      );
-      this.touchedAlready = false;
-    } else {
+  focused() {
+    setTimeout(() => {
       this.touchedAlready = true;
-    }
+    }, 100);
+    
   }
 
-  clicked() {
-    if (this.item) {
-      window.open(
-        "https://thepersondb.org/movie/" + this.item.id , "_blank"
-      );
-    }
+  leftFocus() {
+    this.touchedAlready = false;
   }
 
 }

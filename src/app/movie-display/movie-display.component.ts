@@ -17,22 +17,14 @@ export class MovieDisplayComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  touched() {
-    if (this.touchedAlready && this.item) {
-      window.open(
-        "https://themoviedb.org/movie/" + this.item.id , "_blank"
-      );
-      this.touchedAlready = false;
-    } else {
+  focused() {
+    setTimeout(() => {
       this.touchedAlready = true;
-    }
+    }, 100);
+    
   }
 
-  clicked() {
-    if (this.item) {
-      window.open(
-        "https://themoviedb.org/movie/" + this.item.id , "_blank"
-      );
-    }
+  leftFocus() {
+    this.touchedAlready = false;
   }
 }
