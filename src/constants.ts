@@ -1,6 +1,6 @@
 const prefix = '/api/'
 
-export const HOST = 'https://api-degreezle.joopeeds.com'
+export const HOST = 'https://api.filminthega.ps'
 
 export const ENDPOINTS = {
   puzzle: prefix + 'puzzle/',
