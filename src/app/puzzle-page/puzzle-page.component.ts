@@ -41,4 +41,5 @@ export class PuzzlePageComponent implements OnInit {
       "https://ko-fi.com/filminthegaps", "_blank"
     );
   }
+
 }

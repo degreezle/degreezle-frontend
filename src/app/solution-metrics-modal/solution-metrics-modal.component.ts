@@ -24,6 +24,14 @@ export class SolutionMetricsModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get numberOfPuzzlesSolved() {
+    return Object.keys(this.localStorageService.solutions).length;
+  }
+
+  get averageStepCount() {
+    return Math.floor(Object.values(this.localStorageService.solutions).map(x => x.length - 1).reduce((a, b) => a + b, 0) / this.numberOfPuzzlesSolved)
+  }
+
   copySolution() {
     this.clipboard.copy(`i solved today's filminthega.ps connecting ${this.data.puzzle.start_movie.title} to ${this.data.puzzle.end_movie.title} in ${this.data.solution.solution.length - 1} steps, check it out: https://filminthega.ps/solution/${this.data.solution?.token}`)
   }
