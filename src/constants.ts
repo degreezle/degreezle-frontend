@@ -1,5 +1,7 @@
 const prefix = '/api/'
 
+export const WEBSITE_HOST = 'https://filminthega.ps'
+
 export const HOST = 'https://api.filminthega.ps'
 
 export const ENDPOINTS = {
@@ -10,4 +12,4 @@ export const ENDPOINTS = {
   metrics: prefix + 'metrics/'
 }
 
-export const GTM_ID = 'GTM-M2LPM6H'; 
+export const GTM_ID = 'GTM-M2LPM6H';
