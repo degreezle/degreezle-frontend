@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
+import { HOST } from 'src/constants';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,10 @@ export class AppComponent {
         this.gtmService.pushTag(gtmTag);
       }
     });
+
+    if (window.location.hostname === 'degreezle-test.firebaseapp.com') {
+      window.location.href = HOST;
+    }
   }
 
   constructor(public router: Router, private gtmService: GoogleTagManagerService) {
