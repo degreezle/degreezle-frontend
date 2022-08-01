@@ -25,7 +25,7 @@ export class SolutionMetricsModalComponent implements OnInit {
   }
 
   copySolution() {
-    this.clipboard.copy(`https://twitter.com/intent/tweet?text=i solved today's filminthega.ps connecting ${this.data.puzzle.start_movie.title} to ${this.data.puzzle.end_movie.title} in ${this.data.solution.solution.length - 1} steps, check it out: https://filminthega.ps/solution/${this.data.solution?.token}`)
+    this.clipboard.copy(`i solved today's filminthega.ps connecting ${this.data.puzzle.start_movie.title} to ${this.data.puzzle.end_movie.title} in ${this.data.solution.solution.length - 1} steps, check it out: https://filminthega.ps/solution/${this.data.solution?.token}`)
   }
 
   openTwitterLink() {
