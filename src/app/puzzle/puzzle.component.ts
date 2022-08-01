@@ -105,7 +105,7 @@ export class PuzzleComponent implements OnChanges {
     if (this.solved && this.puzzle) {
       await this.postSolutionAndGetMetrics();
       this.calculateAndStoreSolutionMetrics();
-      this.showCongratulations();
+      this.showSolutionMetrics();
       this.changeURL();
       
     }
@@ -144,7 +144,7 @@ export class PuzzleComponent implements OnChanges {
     }, 300);
   }
 
-  showCongratulations() {
+  showSolutionMetrics() {
     this.dialog.open(SolutionMetricsModalComponent, {
       backdropClass: 'modal-backdrop',
       closeOnNavigation: true,
