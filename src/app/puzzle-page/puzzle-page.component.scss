@@ -15,12 +15,14 @@
   border-width: 1px;
   border-radius: 0 0 0 10px;
   color: #D52A9F;
+  padding: 10px 10px;
 
   .counter {
     font-size: 18px;
     padding: 0 12px;
     font-weight: 500;
     vertical-align: middle;
+    margin: auto;
   }
 
   @media only screen and (max-width: 600px) {
