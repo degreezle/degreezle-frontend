@@ -14,6 +14,7 @@ export class PuzzlePageComponent implements OnInit {
 
   token: string | null = null;
   puzzleId: string | null = null;
+  solved = false;
   darkMode = false;
   stepCount = 1;
 
@@ -45,10 +46,6 @@ export class PuzzlePageComponent implements OnInit {
     window.open(
       "https://ko-fi.com/filminthegaps", "_blank"
     );
-  }
-
-  get solved() {
-    return this.localStorageService.hasSolved(Number(this.puzzleId));
   }
 
   reset() { 
