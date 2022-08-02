@@ -10,13 +10,13 @@
         <li>{{data.solution.count}} <span [ngPlural]="data.solution.count"><ng-template ngPluralCase="=1">person has</ng-template><ng-template ngPluralCase="other">people have</ng-template></span> found the same solution as you</li>
       </ng-template>
       <li *ngIf="data.solution.solution.length - 1 !== data.metrics.shortest_solution"><a href="https://filminthega.ps/solution/{{data.solution.shortest_solution}}" target="_blank">the shortest solution</a> we know of is {{data.metrics.shortest_solution}} steps long</li>
-      <li *ngIf="data.solution.token !== data.solution.longest_solution"><a href="https://filminthega.ps/solution/{{data.solution.longest_solution}}" target="_blank">the longest solution</a> found so far was {{data.metrics.longest_solution}} steps long</li>
-      <li>the average number of steps taken to solve was {{data.metrics.average_steps | number: '1.0-0' }}</li>
-      <li>the median number of steps taken to solve was {{data.metrics.median_steps }}</li>
+      <li *ngIf="data.solution.token !== data.solution.longest_solution"><a href="https://filminthega.ps/solution/{{data.solution.longest_solution}}" target="_blank">the longest solution</a> found so far is {{data.metrics.longest_solution}} steps long</li>
+      <li>the average number of steps taken to solve is {{data.metrics.average_steps | number: '1.0-0' }}</li>
+      <li>the median number of steps taken to solve is {{data.metrics.median_steps }}</li>
     </ng-template>
   </ul>
   <p>
-    you've solved {{ numberOfPuzzlesSolved }} puzzles with an average step count of {{ averageStepCount }}<br>
+    you've solved {{ numberOfPuzzlesSolved }} <span [ngPlural]="numberOfPuzzlesSolved"><ng-template ngPluralCase="=1">puzzle</ng-template><ng-template ngPluralCase="other">puzzles with an average step count of {{ averageStepCount }}</ng-template></span><br>
     your current streak is {{ localStorageService.currentStreak }} and your longest streak is {{ localStorageService.maxStreak }}
   </p>
   <p>copy your result to the clipboard with the button below. it'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>
