@@ -24,7 +24,7 @@ export class AppComponent {
     });
 
     if (window.location.hostname === 'degreezle-test.firebaseapp.com') {
-      window.location.href = WEBSITE_HOST;
+      window.location.href = WEBSITE_HOST + window.location.pathname;
     }
   }
 

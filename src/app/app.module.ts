@@ -25,6 +25,7 @@ import { InstructionsModalComponent } from './instructions-modal/instructions-mo
 import { OurDataPageComponent } from './our-data-page/our-data-page.component';
 import { SolutionMetricsModalComponent } from './solution-metrics-modal/solution-metrics-modal.component';
 import { GTM_ID } from 'src/constants';
+import { RedirectComponent } from './redirect/redirect.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { GTM_ID } from 'src/constants';
     InstructionsModalComponent,
     OurDataPageComponent,
     SolutionMetricsModalComponent,
+    RedirectComponent,
   ],
   imports: [
     BrowserModule,
