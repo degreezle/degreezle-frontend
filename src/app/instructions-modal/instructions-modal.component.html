@@ -1,21 +1,24 @@
 <mat-dialog-content>
-  <p><strong>film in the gaps</strong> is your daily chance to link two films in as few steps as possible.</p>
-  <p>build a solution connecting films to cast & crew, to their filmographies, and so on.</p>
-  <p>each puzzle has a solution of six or fewer steps. if you need more context about a film or person click to see their details on TMDB.</p>
+  <p><strong>film in the gaps:</strong> link two films in as few steps as possible.</p>
+  <p>select a cast or crew member from the first film, then select a film from that person's filmography.</p>
+  <p>repeat until you reach the last film.</p>
   <p class="example-solution">
     <img class="example-solution" src="assets/examplesolution.png">
-    e.g. <strong>Spider-Man: Far From Home</strong> starred <strong>Jake Gyllenhaal</strong> who played Jack Twist
-    in <strong>Brokeback Mountain</strong> which was directed by <strong>Ang Lee</strong> 
-    who also directed <strong>Hulk</strong> which starred <strong>Jennifer Connelly</strong> who appeared in 
+    e.g. <strong>Spider-Man: Far From Home</strong> stars <strong>Jake Gyllenhaal</strong> who plays Jack Twist
+    in <strong>Brokeback Mountain</strong> which is directed by <strong>Ang Lee</strong> who also directs
+    <strong>Hulk</strong> which stars <strong>Jennifer Connelly</strong> who appears in 
     <strong>Spider-Man: Homecoming</strong>!
   </p>
+  <p>each puzzle has a solution of six or fewer steps.</p>
+  <p>if you need more context about a film or person click to see their details on TMDB.</p>
+  
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-stroked-button class="primary" aria-label="understood instructions" [mat-dialog-close]="true" cdkFocusInitial>
     i'm ready to film in the gaps
   </button>
-
+<!-- 
   <button mat-stroked-button aria-label="our data" [mat-dialog-close]="true" routerLink="/our-data">
     about our data
-  </button>
+  </button> -->
 </mat-dialog-actions>
