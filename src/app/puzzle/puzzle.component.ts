@@ -156,7 +156,8 @@ export class PuzzleComponent implements OnChanges {
       closeOnNavigation: true,
       restoreFocus: false,
       autoFocus: true,
-      maxWidth: 500,
+      minWidth: 200, 
+      maxWidth: 500, 
       data: {
         puzzle: this.puzzle,
         solution: this.solvedSolution,
