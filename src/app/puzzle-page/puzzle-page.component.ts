@@ -47,6 +47,10 @@ export class PuzzlePageComponent implements OnInit {
     );
   }
 
+  get solved() {
+    return this.localStorageService.hasSolved(Number(this.puzzleId));
+  }
+
   reset() { 
     this.puzzle?.reset();
   }

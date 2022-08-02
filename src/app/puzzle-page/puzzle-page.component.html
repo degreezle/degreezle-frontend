@@ -23,7 +23,7 @@
       </span>
     </button>
   </mat-toolbar>
-  <div class="second-menu" *ngIf="!token">
+  <div class="second-menu" *ngIf="!token && !solved">
     <span class="counter">{{stepCount}} <span [ngPlural]="stepCount"><ng-template ngPluralCase="=1">step</ng-template><ng-template ngPluralCase="other">steps</ng-template></span></span>
     <button mat-icon-button aria-label="Reset" (click)="reset()" class="reset">
       <mat-icon>
