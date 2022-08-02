@@ -24,7 +24,7 @@
     </button>
   </mat-toolbar>
   <div class="second-menu">
-    <span class="counter">2 steps long</span>
+    <span class="counter">{{stepCount}} steps long</span>
     <button mat-icon-button aria-label="Reset" (click)="openKofi()" class="">
       <mat-icon>
         restart_alt
@@ -36,6 +36,6 @@
 
 <div class="center-puzzle" [class.dark-mode]="darkMode">
   <div class="bar-spacer"></div>
-  <app-puzzle [token]="token" [puzzleId]="puzzleId"></app-puzzle>
+  <app-puzzle [token]="token" [puzzleId]="puzzleId" (stepCountChanged)="stepCount = $event"></app-puzzle>
   <div class="bar-spacer"></div>
 </div>
