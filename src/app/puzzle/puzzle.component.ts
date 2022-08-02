@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CastMember, Metrics, SolutionResponse, StartPuzzle } from 'src/models';
@@ -34,6 +34,7 @@ export class PuzzleComponent implements OnChanges {
     public dialog: MatDialog,
     public localStorageService: LocalStorageService,
     public location: Location,
+    private cdref: ChangeDetectorRef, 
   ) {
     puzzleService.puzzle$.subscribe(
       puzzle => {
@@ -97,7 +98,7 @@ export class PuzzleComponent implements OnChanges {
 
   async add(id: number) {
     this.puzzleSequence.push(id);
-    this.stepCountChanged.emit(this.puzzleSequence.length - 1);
+    this.stepCountChanged.emit(this.puzzleSequence.length);
     this.solved = this.hasFoundSolution();
     this.postSolutionAndShowModal();
     this.scrollToEnd();
@@ -181,6 +182,13 @@ export class PuzzleComponent implements OnChanges {
     }
   }
 
-
-
+  reset() {
+    if (this.puzzle) {
+      this.puzzleSequence = []; 
+      // so angular gets rid of all rendered components
+      this.cdref.detectChanges();
+      this.puzzleSequence = [this.puzzle.start_movie.id];
+      this.stepCountChanged.emit(1);
+    }
+  }
 }

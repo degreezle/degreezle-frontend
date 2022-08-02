@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { InstructionsModalComponent } from '../instructions-modal/instructions-modal.component';
+import { PuzzleComponent } from '../puzzle/puzzle.component';
 import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
@@ -14,7 +15,10 @@ export class PuzzlePageComponent implements OnInit {
   token: string | null = null;
   puzzleId: string | null = null;
   darkMode = false;
-  stepCount = 0;
+  stepCount = 1;
+
+  @ViewChild(PuzzleComponent) puzzle: PuzzleComponent | undefined;
+
 
   constructor(public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) { }
 
@@ -43,6 +47,8 @@ export class PuzzlePageComponent implements OnInit {
     );
   }
 
-  reset() { }
+  reset() { 
+    this.puzzle?.reset();
+  }
 
 }
