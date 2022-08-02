@@ -8,8 +8,8 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    
-  
+
+
     img {
       min-width: 100%;
       min-height: 100%;
@@ -65,7 +65,7 @@
   border-radius: 5px;
   overflow: hidden;
   border: 2px solid transparent;
-  
+
   .go-corner {
     height: 100%;
     width: 20px;
@@ -74,9 +74,9 @@
     transform: skew(4deg);
     margin-right: -55px;
     align-items: start;
-    background-image: linear-gradient(-45deg, #8F479A 1%, #D52A9F 100%);
+    background-image: linear-gradient(0deg, #a31275 1%, #D52A9F 100%);
   }
-  
+
   .go-arrow {
     transform: skew(-deg);
     margin-left: -1px;
@@ -86,9 +86,9 @@
 
   &:hover {
     border: 2px solid #D52A9F;
-    
+
   }
-  
+
   h3 {margin-top: 8px;}
 }
 

@@ -1,11 +1,11 @@
-import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CastMember, Metrics, SolutionResponse, StartPuzzle } from 'src/models';
 import { PuzzleService } from '../services/puzzle-service.service';
 import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solution-metrics-modal.component';
 import { LocalStorageService } from '../services/local-storage.service';
-import { Location } from '@angular/common'; 
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-puzzle',
@@ -26,12 +26,13 @@ export class PuzzleComponent implements OnChanges {
   loading = true;
   error = false;
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
+  @Output() stepCountChanged: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
-    public puzzleService: PuzzleService, 
-    public route: ActivatedRoute, 
-    public dialog: MatDialog, 
-    public localStorageService: LocalStorageService, 
+    public puzzleService: PuzzleService,
+    public route: ActivatedRoute,
+    public dialog: MatDialog,
+    public localStorageService: LocalStorageService,
     public location: Location,
   ) {
     puzzleService.puzzle$.subscribe(
@@ -96,6 +97,7 @@ export class PuzzleComponent implements OnChanges {
 
   async add(id: number) {
     this.puzzleSequence.push(id);
+    this.stepCountChanged.emit(this.puzzleSequence.length - 1);
     this.solved = this.hasFoundSolution();
     this.postSolutionAndShowModal();
     this.scrollToEnd();
@@ -107,7 +109,7 @@ export class PuzzleComponent implements OnChanges {
       this.calculateAndStoreSolutionMetrics();
       this.showSolutionMetrics();
       this.changeURL();
-      
+
     }
   }
 
@@ -120,7 +122,7 @@ export class PuzzleComponent implements OnChanges {
   calculateAndStoreSolutionMetrics() {
     if (this.puzzle && this.solvedSolution) {
       this.localStorageService.addSolution(
-        this.puzzle, 
+        this.puzzle,
         this.solvedSolution
       );
       if (this.puzzle.local_datetime) {

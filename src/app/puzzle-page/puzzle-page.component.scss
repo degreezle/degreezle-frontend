@@ -5,6 +5,35 @@
 .nav-bar {
     position: fixed;
     z-index: 1;
+    width: 100%;
+}
+
+.second-menu {
+  right: 0;
+  position: absolute;
+  background-color: #D52A9F;
+  padding: 10px 16px;
+  border-radius: 0 0 0 10px;
+  background-image: linear-gradient(0deg, #a31275 1%, #D52A9F 100%);
+  color: white;
+
+  .counter {
+    font-size: 18px;
+    padding: 0 12px;
+    font-weight: 500;
+    vertical-align: middle;
+  }
+
+  @media only screen and (max-width: 600px) {
+    max-width: 35px;
+    text-align: center;
+
+    .counter {
+      padding-bottom: 10px 0;
+      font-size: 16px;
+    }
+  }
+
 }
 
 .center-puzzle {

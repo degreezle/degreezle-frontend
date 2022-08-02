@@ -14,6 +14,7 @@ export class PuzzlePageComponent implements OnInit {
   token: string | null = null;
   puzzleId: string | null = null;
   darkMode = false;
+  stepCount = 0;
 
   constructor(public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) { }
 
@@ -41,5 +42,7 @@ export class PuzzlePageComponent implements OnInit {
       "https://ko-fi.com/filminthegaps", "_blank"
     );
   }
+
+  reset() { }
 
 }
