@@ -56,4 +56,11 @@ export class PuzzlePageComponent implements OnInit {
     this.puzzle?.showSolutionMetrics();
   }
 
+  get tokenIsOwnToken() {
+    if (this.puzzle?.puzzle?.id) {
+      return this.token && this.token === this.localStorageService.getSolution(this.puzzle?.puzzle?.id).token;
+    } else {
+      return false;
+    }
+  }
 }
