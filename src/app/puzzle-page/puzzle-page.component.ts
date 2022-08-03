@@ -20,7 +20,6 @@ export class PuzzlePageComponent implements OnInit {
 
   @ViewChild(PuzzleComponent) puzzle: PuzzleComponent | undefined;
 
-
   constructor(public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
