@@ -28,20 +28,8 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
 
 .mat-dialog-actions {
   justify-content: space-between;
-  margin-bottom: -16px !important;
 }
 
-
-@media only screen and (max-width: 600px) {
-  .mat-dialog-actions { 
-    justify-content: end;
-     
-    button {
-      margin-bottom: 5px;
-    }
-  }
-
-}
 .mat-button-focus-overlay {
   background: pink;
 }
