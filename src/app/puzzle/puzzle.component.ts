@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { CastMember, Metrics, SolutionResponse, StartPuzzle } from 'src/models';
+import { CastMember, SolutionResponse, StartPuzzle, SolutionMetrics } from 'src/models';
 import { PuzzleService } from '../services/puzzle-service.service';
 import { SolutionMetricsModalComponent } from '../solution-metrics-modal/solution-metrics-modal.component';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -22,7 +22,7 @@ export class PuzzleComponent implements OnChanges {
   solved = false;
   loadedSolution: any[] = [];
   solvedSolution: SolutionResponse | null = null;
-  metrics: Metrics | null = null;
+  solutionMetrics: SolutionMetrics | null = null;
   loading = true;
   error = false;
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
@@ -36,23 +36,26 @@ export class PuzzleComponent implements OnChanges {
     public dialog: MatDialog,
     public localStorageService: LocalStorageService,
     public location: Location,
-    private cdref: ChangeDetectorRef, 
+    private cdref: ChangeDetectorRef,
   ) {
     puzzleService.puzzle$.subscribe(
       puzzle => {
-        if (puzzle.id && !this.token) {
+        if (puzzle.id) {
           this.puzzle = puzzle;
 
-          if (this.localStorageService.hasSolved(this.puzzle.id)) {
+          if (this.localStorageService.hasSolved(puzzle.id)) {
             this.solvedPuzzle.emit(true);
-            this.token = this.localStorageService.getSolution(this.puzzle.id).token;
-            if (this.token) {
-              this.loadSolution(this.token);
-            }
-          } else {
-            this.loadGameInfo(this.puzzle)
+            this.token = this.localStorageService.getSolution(puzzle.id).token;
           }
         }
+
+        if (this.token) {
+          this.solvedPuzzle.emit(true);
+          this.loadSolution(this.token);
+        } else if (puzzle.id) {
+          this.loadGameInfo(puzzle)
+        }
+
       },
       () => {
         this.error = true;
@@ -97,6 +100,15 @@ export class PuzzleComponent implements OnChanges {
         this.loading = false;
       }
     )
+    this.puzzleService.getSolutionMetrics(token).subscribe(
+      solutionMetrics => {
+        this.solutionMetrics = solutionMetrics;
+      },
+      () => {
+        this.error = true;
+        this.loading = false;
+      }
+    );
   }
 
   async add(id: number) {
@@ -137,8 +149,10 @@ export class PuzzleComponent implements OnChanges {
 
   async postSolutionAndGetMetrics() {
     if (this.puzzle) {
-      this.solvedSolution = await this.puzzleService.postSolution(this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]).toPromise()
-      this.metrics = await this.puzzleService.getMetrics().toPromise();
+      this.solvedSolution = await this.puzzleService.postSolution(
+        this.puzzle.id, [...this.puzzleSequence, this.puzzle.end_movie.id]
+      ).toPromise()
+      this.solutionMetrics = await this.puzzleService.getSolutionMetrics(this.solvedSolution.token).toPromise();
     }
   }
 
@@ -156,12 +170,12 @@ export class PuzzleComponent implements OnChanges {
       closeOnNavigation: true,
       restoreFocus: false,
       autoFocus: true,
-      minWidth: 200, 
-      maxWidth: 500, 
+      minWidth: 200,
+      maxWidth: 500,
       data: {
+        token: this.solvedSolution?.token ?? this.token,
         puzzle: this.puzzle,
-        solution: this.solvedSolution,
-        metrics: this.metrics,
+        solutionMetrics: this.solutionMetrics,
       }
     });
   }
@@ -188,7 +202,7 @@ export class PuzzleComponent implements OnChanges {
 
   reset() {
     if (this.puzzle) {
-      this.puzzleSequence = []; 
+      this.puzzleSequence = [];
       // so angular gets rid of all rendered components
       this.cdref.detectChanges();
       this.puzzleSequence = [this.puzzle.start_movie.id];

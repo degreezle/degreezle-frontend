@@ -9,7 +9,8 @@ export const ENDPOINTS = {
   movie: prefix + 'movie/',
   person: prefix + 'person/',
   solution: prefix + 'solution/',
-  metrics: prefix + 'metrics/'
+  puzzleMetrics: prefix + 'metrics/puzzle/',
+  solutionMetrics: prefix + 'metrics/solution/',
 }
 
 export const GTM_ID = 'GTM-M2LPM6H';

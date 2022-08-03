@@ -19,7 +19,7 @@ export interface Movie {
 /**
  * StartPuzzle model
  */
- export interface StartPuzzle {
+export interface StartPuzzle {
   id: number;
   start_movie: Movie;
   end_movie: Movie;
@@ -29,7 +29,7 @@ export interface Movie {
 /**
  * SolutionResponse model
  */
- export interface SolutionResponse {
+export interface SolutionResponse {
   puzzle: number;
   token: string;
   solution: (Movie | CastMember)[];
@@ -39,9 +39,10 @@ export interface Movie {
 }
 
 /**
- * Metrics model
+ * Puzzle Metrics model
  */
- export interface Metrics {
+export interface PuzzleMetrics {
+  id: number;
   num_solved: number;
   shortest_solution: number;
   longest_solution: number;
@@ -50,12 +51,28 @@ export interface Movie {
 }
 
 /**
+ * Solution Metrics model
+ */
+export interface SolutionMetrics {
+  token: string;
+  shortest_solution_token: string;
+  longest_solution_token: string;
+  num_solved: number;
+  num_steps: number;
+  count: number;
+  shortest_solution_steps: number;
+  longest_solution_steps: number;
+  average_steps: number;
+  median_steps: number;
+}
+
+/**
  * Storage model V1.0.0
  */
- export interface StorageV1_0_0 {
+export interface StorageV1_0_0 {
   seen_instructions?: boolean;
   solutions?: {
-      [puzzleId: number]: StorageSolutionV1_0_0;
+    [puzzleId: number]: StorageSolutionV1_0_0;
   };
   current_streak?: number;
   max_streak?: number;

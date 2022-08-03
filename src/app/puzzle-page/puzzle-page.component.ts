@@ -48,8 +48,12 @@ export class PuzzlePageComponent implements OnInit {
     );
   }
 
-  reset() { 
+  reset() {
     this.puzzle?.reset();
+  }
+
+  showSolutionMetrics() {
+    this.puzzle?.showSolutionMetrics();
   }
 
 }

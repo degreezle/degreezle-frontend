@@ -5,11 +5,11 @@
     <!-- <button mat-icon-button aria-label="Dark/light mode" (click)="darkMode = !darkMode">
       <mat-icon>lightbulb_outline</mat-icon>
     </button> -->
-    <!-- <button mat-icon-button aria-label="Show solution metrics" (click)="showSolutionMetrics()">
+    <button *ngIf="solved" mat-icon-button aria-label="Show solution metrics" (click)="showSolutionMetrics()">
       <span class="material-symbols-outlined">
         monitoring
       </span>
-    </button> -->
+    </button>
 
     <button mat-icon-button aria-label="Buy us a coffee" (click)="openKofi()">
       <span class="material-symbols-outlined">

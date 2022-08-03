@@ -1,22 +1,43 @@
-<mat-dialog-content *ngIf="data.solution">
+<mat-dialog-content *ngIf="data.solutionMetrics && data.puzzle">
   <h2>🎉 nice one! 🎉</h2>
-  <p>you connected <strong>{{data.puzzle.start_movie.title}}</strong> to <strong>{{data.puzzle.end_movie.title}}</strong> in {{data.solution.solution.length - 1}} steps 🥳</p>
+  <p>you connected <strong>{{data.puzzle.start_movie.title}}</strong> to <strong>{{data.puzzle.end_movie.title}}</strong> in {{data.solutionMetrics.num_steps}} steps 🥳</p>
   <ul>
-    <li *ngIf="data.metrics.num_solved === 1; else elseMorePeopleSolved">you're the only person who has filmed in the gaps so far today</li>
+    <li *ngIf="data.solutionMetrics.num_solved === 1; else elseMorePeopleSolved">you're the only person who has filmed in the gaps so far today</li>
     <ng-template #elseMorePeopleSolved>
-      <li>you're one of {{data.metrics.num_solved}} people who have filmed in the gaps today</li>
-      <li *ngIf="!data.solution.count; else elseMorePeopleSameSolution">but you're the only person who has found this solution</li>
+      <li>you're one of {{data.solutionMetrics.num_solved}} people who have filmed in the gaps today</li>
+      <li *ngIf="!data.solutionMetrics.count; else elseMorePeopleSameSolution">but you're the only person who has found this solution</li>
       <ng-template #elseMorePeopleSameSolution>
-        <li>{{data.solution.count}} <span [ngPlural]="data.solution.count"><ng-template ngPluralCase="=1">person has</ng-template><ng-template ngPluralCase="other">people have</ng-template></span> found the same solution as you</li>
+        <li>
+          {{data.solutionMetrics.count}}
+          <span [ngPlural]="data.solutionMetrics.count">
+            <ng-template ngPluralCase="=1">person has</ng-template>
+            <ng-template ngPluralCase="other">people have</ng-template>
+          </span> found the same solution as you
+        </li>
       </ng-template>
-      <li *ngIf="data.solution.solution.length - 1 !== data.metrics.shortest_solution"><a href="https://filminthega.ps/solution/{{data.solution.shortest_solution}}" target="_blank">the shortest solution</a> we know of is {{data.metrics.shortest_solution}} steps long</li>
-      <li *ngIf="data.solution.token !== data.solution.longest_solution"><a href="https://filminthega.ps/solution/{{data.solution.longest_solution}}" target="_blank">the longest solution</a> found so far is {{data.metrics.longest_solution}} steps long</li>
-      <li>the average number of steps taken to solve is {{data.metrics.average_steps | number: '1.0-0' }}</li>
-      <li>the median number of steps taken to solve is {{data.metrics.median_steps }}</li>
+      <li *ngIf="data.solutionMetrics.num_steps !== data.solutionMetrics.shortest_solution_steps">
+        <a href="https://filminthega.ps/solution/{{data.solutionMetrics.shortest_solution_token}}" target="_blank">
+          the shortest solution
+        </a>
+        we know of is {{data.solutionMetrics.shortest_solution_steps}} steps long
+      </li>
+      <li *ngIf="data.solutionMetrics.num_steps !== data.solutionMetrics.longest_solution_steps">
+        <a href="https://filminthega.ps/solution/{{data.solutionMetrics.longest_solution_token}}" target="_blank">
+          the longest solution
+        </a>
+        found so far is {{data.solutionMetrics.longest_solution_steps}} steps long
+      </li>
+      <li>the average number of steps taken to solve is {{data.solutionMetrics.average_steps | number: '1.0-0' }}</li>
+      <li>the median number of steps taken to solve is {{data.solutionMetrics.median_steps }}</li>
     </ng-template>
   </ul>
   <p>
-    you've solved {{ numberOfPuzzlesSolved }} <span [ngPlural]="numberOfPuzzlesSolved"><ng-template ngPluralCase="=1">puzzle</ng-template><ng-template ngPluralCase="other">puzzles with an average step count of {{ averageStepCount }}</ng-template></span><br>
+    you've solved {{ numberOfPuzzlesSolved }}
+    <span [ngPlural]="numberOfPuzzlesSolved">
+      <ng-template ngPluralCase="=1">puzzle</ng-template>
+      <ng-template ngPluralCase="other">puzzles with an average step count of {{ averageStepCount }}</ng-template>
+    </span>
+    <br>
     your current streak is {{ localStorageService.currentStreak }} and your longest streak is {{ localStorageService.maxStreak }}
   </p>
   <p>copy your result to the clipboard with the button below. it'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Metrics, SolutionResponse, StartPuzzle } from 'src/models';
+import { SolutionMetrics, StartPuzzle } from 'src/models';
 import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
@@ -14,11 +14,11 @@ export class SolutionMetricsModalComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {
-      puzzle: StartPuzzle, 
-      solution: SolutionResponse, 
-      metrics: Metrics
-    }, 
-    private clipboard: Clipboard, 
+      token: string,
+      puzzle: StartPuzzle,
+      solutionMetrics: SolutionMetrics
+    },
+    private clipboard: Clipboard,
     public localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
@@ -33,11 +33,11 @@ export class SolutionMetricsModalComponent implements OnInit {
   }
 
   copySolution() {
-    this.clipboard.copy(`i solved today's https://filminthega.ps connecting ${this.data.puzzle.start_movie.title} to ${this.data.puzzle.end_movie.title} in ${this.data.solution.solution.length - 1} steps, check it out: https://filminthega.ps/solution/${this.data.solution?.token}`)
+    this.clipboard.copy(`i solved today's https://filminthega.ps connecting ${this.data.puzzle.start_movie.title} to ${this.data.puzzle.end_movie.title} in ${this.data.solutionMetrics.num_steps} steps, check it out: https://filminthega.ps/solution/${this.data.token}`)
   }
 
   openTwitterLink() {
-    window.open(`https://twitter.com/intent/tweet?text=i solved today's https://filminthega.ps connecting ${this.data.puzzle.start_movie.title} to ${this.data.puzzle.end_movie.title} in ${this.data.solution.solution.length - 1} steps, check it out: https://filminthega.ps/solution/${this.data.solution?.token}`)
+    window.open(`https://twitter.com/intent/tweet?text=i solved today's https://filminthega.ps connecting ${this.data.puzzle.start_movie.title} to ${this.data.puzzle.end_movie.title} in ${this.data.solutionMetrics.num_steps} steps, check it out: https://filminthega.ps/solution/${this.data.token}`)
   }
 
 }

@@ -30,7 +30,7 @@ export class LocalStorageService {
   }
 
   creataData() {
-    let data: StorageV1_0_0 = {version: this.version};
+    let data: StorageV1_0_0 = { version: this.version };
     localStorage.setItem('data', JSON.stringify(data));
   }
 
@@ -53,7 +53,7 @@ export class LocalStorageService {
   public addSolution(puzzle: StartPuzzle, solution: SolutionResponse) {
     let solutions = this.getData().solutions ?? {};
     solutions[puzzle.id] = {
-      token: solution.token, 
+      token: solution.token,
       length: solution.solution.length
     };
     this.setData('solutions', solutions);
@@ -80,10 +80,9 @@ export class LocalStorageService {
     let lastSolutionDateString = this.getData().last_solution_date;
 
     if (lastSolutionDateString) {
-      let lastSolutionDate = new Date(lastSolutionDateString);    
+      let lastSolutionDate = new Date(lastSolutionDateString);
       let yesterday = new Date(todays_date_string);
       yesterday.setDate(yesterday.getDate() - 1); // yesterday = today - 1
-      console.log(yesterday.toDateString() !== lastSolutionDate.toDateString(), yesterday.toDateString(), lastSolutionDate.toDateString());
       return yesterday.toDateString() !== lastSolutionDate.toDateString();
     } else {
       return true;
