@@ -73,7 +73,7 @@ export class SolutionMetricsModalComponent implements OnInit {
   buildMessage() {
     let step_count = this.numberToEmoji(this.data.solutionMetrics.num_steps);
     let solution_emoji = this.solutionQualityEmoji(this.data.solutionMetrics.num_steps);
-    return `i #filminthegaps between ${this.data.puzzle.start_movie.title} and ${this.data.puzzle.end_movie.title} in ${step_count} steps ${solution_emoji}. try it yourself at https://filminthega.ps or see my solution at https://filminthega.ps/solution/${this.data.token}`;
+    return `i #filminthegaps between ${this.data.puzzle.start_movie.title} and ${this.data.puzzle.end_movie.title} in ${step_count} steps ${solution_emoji}. see my solution at https://filminthega.ps/solution/${this.data.token} or try it yourself at https://filminthega.ps`;
   }
 
   copySolution() {
