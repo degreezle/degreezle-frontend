@@ -48,6 +48,8 @@ export class PuzzleComponent implements OnChanges {
           }
         }
 
+        console.log(puzzle.id, 'solved', this.localStorageService.hasSolved(puzzle.id))
+
         if (this.localStorageService.hasSolved(puzzle.id)) {
           this.solvedPuzzle.emit(true);
         }
@@ -95,6 +97,7 @@ export class PuzzleComponent implements OnChanges {
     this.puzzleService.getSolution(token).subscribe(
       solution => {
         this.loadedSolution = solution.solution;
+        this.puzzleService.getStartPuzzle(solution.puzzle);
         this.loading = false;
       },
       () => {
@@ -102,15 +105,17 @@ export class PuzzleComponent implements OnChanges {
         this.loading = false;
       }
     )
-    this.puzzleService.getSolutionMetrics(token).subscribe(
-      solutionMetrics => {
-        this.solutionMetrics = solutionMetrics;
-      },
-      () => {
-        this.error = true;
-        this.loading = false;
-      }
-    );
+    if (this.solutionMetrics?.token !== token) {
+      this.puzzleService.getSolutionMetrics(token).subscribe(
+        solutionMetrics => {
+          this.solutionMetrics = solutionMetrics;
+        },
+        () => {
+          this.error = true;
+          this.loading = false;
+        }
+      );
+    }
   }
 
   async add(id: number) {
