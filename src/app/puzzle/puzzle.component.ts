@@ -44,13 +44,15 @@ export class PuzzleComponent implements OnChanges {
           this.puzzle = puzzle;
 
           if (!this.token && this.localStorageService.hasSolved(puzzle.id)) {
-            this.solvedPuzzle.emit(true);
             this.token = this.localStorageService.getSolution(puzzle.id).token;
           }
         }
 
-        if (this.token) {
+        if (this.localStorageService.hasSolved(puzzle.id)) {
           this.solvedPuzzle.emit(true);
+        }
+
+        if (this.token) {
           this.loadSolution(this.token);
         } else if (puzzle.id) {
           this.loadGameInfo(puzzle)
