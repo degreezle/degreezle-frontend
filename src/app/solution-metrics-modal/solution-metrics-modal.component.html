@@ -31,15 +31,25 @@
       <li>the median number of steps taken to solve is {{data.solutionMetrics.median_steps }}</li>
     </ng-template>
   </ul>
-  <p>
-    you've solved {{ numberOfPuzzlesSolved }}
-    <span [ngPlural]="numberOfPuzzlesSolved">
-      <ng-template ngPluralCase="=1">puzzle</ng-template>
-      <ng-template ngPluralCase="other">puzzles with an average step count of {{ averageStepCount }}</ng-template>
-    </span>
-    <br>
-    your current streak is {{ localStorageService.currentStreak }} and your longest streak is {{ localStorageService.maxStreak }}
-  </p>
+
+  <div class="stats">
+    <div class="stats-item">
+       <div class="number">{{ numberOfPuzzlesSolved }}</div>
+      <div class="text">Played</div>
+    </div>
+    <div class="stats-item">
+       <div class="number">{{ averageStepCount }}</div>
+      <div class="text">Average step count</div>
+    </div>  
+    <div class="stats-item">
+       <div class="number">{{ localStorageService.currentStreak }}</div>
+      <div class="text">Current streak</div>
+    </div>
+    <div class="stats-item">
+       <div class="number">{{ localStorageService.maxStreak }}</div>
+      <div class="text">Longest streak</div>
+    </div>
+  </div>
   <p>copy your result to the clipboard with the button below. it'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>
 </mat-dialog-content>
 

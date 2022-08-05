@@ -18,3 +18,25 @@ h2 {
  ul {
   padding-left: 20px;
  }
+
+ .stats {
+  display: flex; 
+  flex-direction: row; 
+  gap: 16px;
+  padding: 10px;
+ }
+
+ .stats-item {
+  display: flex; 
+  align-items: center; 
+  flex-direction: column; 
+  gap: 4px;
+
+  .text {
+    text-align: center; line-height: 1.2;
+  }
+
+  .number {
+    font-size: 24px;
+  }
+ }
