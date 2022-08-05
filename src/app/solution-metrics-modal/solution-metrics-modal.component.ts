@@ -51,7 +51,7 @@ export class SolutionMetricsModalComponent implements OnInit {
   numberToEmoji(number: Number) {
     let number_parts = Array.from(String(number));
     let emoji_parts = number_parts.map(this.digitToEmoji);
-    let emoji_string = emoji_parts.join();
+    let emoji_string = emoji_parts.join('');
     return emoji_string;
   }
 
