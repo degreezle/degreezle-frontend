@@ -28,7 +28,12 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
 }
 
 .mat-dialog-actions {
-  justify-content: space-between;
+  justify-content: left;
+  margin-bottom: 0px !important;
+
+  button {
+    margin-right: 20px;
+  }
 }
 
 .mat-button-focus-overlay {

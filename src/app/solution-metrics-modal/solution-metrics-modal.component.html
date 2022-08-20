@@ -32,25 +32,7 @@
     </ng-template>
   </ul>
 
-  <div class="stats">
-    <div class="stats-item">
-       <div class="number">{{ numberOfPuzzlesSolved }}</div>
-      <div class="text">Played</div>
-    </div>
-    <div class="stats-item">
-       <div class="number">{{ averageStepCount }}</div>
-      <div class="text">Average step count</div>
-    </div>  
-    <div class="stats-item">
-       <div class="number">{{ localStorageService.currentStreak }}</div>
-      <div class="text">Current streak</div>
-    </div>
-    <div class="stats-item">
-       <div class="number">{{ localStorageService.maxStreak }}</div>
-      <div class="text">Longest streak</div>
-    </div>
-  </div>
-  <p>copy your result to the clipboard with the button below. it'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>
+  <p>share your result using the buttons below. we'll include a link to your exact solution for people who've already solved or are comfortable with <strong>spoilers</strong> 😉</p>
 </mat-dialog-content>
 
 <mat-dialog-actions>
@@ -66,3 +48,25 @@
     bye!
   </button>
 </mat-dialog-actions>
+
+<mat-dialog-content *ngIf="numberOfPuzzlesSolved > 1">
+  <h2>your stats 📈</h2>
+  <div class="stats">
+    <div class="stats-item">
+       <div class="number">{{ numberOfPuzzlesSolved }}</div>
+      <div class="text">played</div>
+    </div>
+    <div class="stats-item">
+       <div class="number">{{ averageStepCount }}</div>
+      <div class="text">average step count</div>
+    </div>  
+    <div class="stats-item">
+       <div class="number">{{ localStorageService.currentStreak }}</div>
+      <div class="text">current streak</div>
+    </div>
+    <div class="stats-item">
+       <div class="number">{{ localStorageService.maxStreak }}</div>
+      <div class="text">longest streak</div>
+    </div>
+  </div>
+</mat-dialog-content>
