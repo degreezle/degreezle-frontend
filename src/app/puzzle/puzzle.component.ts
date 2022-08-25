@@ -186,7 +186,7 @@ export class PuzzleComponent implements OnChanges {
   }
 
   hasFoundSolution() {
-    return this.puzzleSequence.length > 0 && this.possibleEndings.includes(this.puzzleSequence[this.puzzleSequence.length - 1]) && this.puzzleSequence.length % 2 !== 0;
+    return this.puzzleSequence.length > 0 && this.possibleEndings.includes(this.puzzleSequence[this.puzzleSequence.length - 1]) && this.puzzleSequence.length % 2 === 0;
   }
 
   showMovieSelector(index: number) {
