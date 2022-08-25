@@ -186,6 +186,9 @@ export class PuzzleComponent implements OnChanges {
   }
 
   hasFoundSolution() {
+    console.log(this.possibleEndings);
+    console.log(this.puzzleSequence[this.puzzleSequence.length - 1]);
+    console.log(this.puzzleSequence.length);
     return this.puzzleSequence.length > 0 && this.possibleEndings.includes(this.puzzleSequence[this.puzzleSequence.length - 1]) && this.puzzleSequence.length % 2 === 0;
   }
 
