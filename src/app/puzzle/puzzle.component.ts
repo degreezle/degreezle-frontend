@@ -48,8 +48,6 @@ export class PuzzleComponent implements OnChanges {
           }
         }
 
-        console.log(puzzle.id, 'solved', this.localStorageService.hasSolved(puzzle.id))
-
         if (this.localStorageService.hasSolved(puzzle.id)) {
           this.solvedPuzzle.emit(true);
         }
@@ -188,7 +186,7 @@ export class PuzzleComponent implements OnChanges {
   }
 
   hasFoundSolution() {
-    return this.puzzleSequence.length > 0 && this.possibleEndings.includes(this.puzzleSequence[this.puzzleSequence.length - 1])
+    return this.puzzleSequence.length > 0 && this.possibleEndings.includes(this.puzzleSequence[this.puzzleSequence.length - 1]) && this.puzzleSequence.length % 2 !== 0;
   }
 
   showMovieSelector(index: number) {
