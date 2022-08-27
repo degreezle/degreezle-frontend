@@ -45,10 +45,10 @@ export class PuzzleComponent implements OnChanges {
 
           if (!this.token && this.localStorageService.hasSolved(puzzle.id)) {
             this.token = this.localStorageService.getSolution(puzzle.id).token;
-          }
+          } 
         }
 
-        if (this.localStorageService.hasSolved(puzzle.id)) {
+        if (this.localStorageService.hasSolved(puzzle.id) && this.localStorageService.isOwnToken(puzzle.id, this.token)) {
           this.solvedPuzzle.emit(true);
         }
 
