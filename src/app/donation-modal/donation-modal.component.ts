@@ -18,14 +18,9 @@ export class DonationModalComponent implements OnInit {
     return Object.keys(this.localStorageService.solutions).length;
   }
 
-<<<<<<< HEAD
   openKofi() {
     window.open(
       "https://ko-fi.com/filminthegaps", "_blank"
     );
-=======
-  donate() {
-    window.location.href = 'https://ko-fi.com/filminthegaps';
->>>>>>> 8c6ff80c345da84e7404a27d540803165d17f262
   }
 }
