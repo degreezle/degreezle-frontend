@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <p>hi! 👋 </p>
+
+  <p><strong>filminthega.ps</strong> has been running for almost a year <span *ngIf="numberOfPuzzlesSolved">and you've completed {{numberOfPuzzlesSolved}} puzzles</span>.</p>
+
+  <p>if everyone who regularly plays donated $5 via <a href="https://ko-fi.com/filminthegaps">our ko-fi page</a> it would cover our annual domain renewal. we will renew the domain if we gather $200 by July 14, otherwise filminthega.ps will be no more!</p>
+
+  <p>if <a href="filminthega.ps">filminthega.ps</a> lives to celebrate its first birthday, donors will get to guest-write a puzzle and, among other improvements, we will build an archive so you can easily find and complete any puzzles you've missed.</p>
+
+  <p>thanks!</p>
+  <p>andrew & joão</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button class="primary" aria-label="understood instructions" [mat-dialog-close]="true" (click)="donate()" cdkFocusInitial>
+    i'm ready to donate
+  </button>
+<!--
+  <button mat-stroked-button aria-label="our data" [mat-dialog-close]="true" routerLink="/our-data">
+    about our data
+  </button> -->
+</mat-dialog-actions>

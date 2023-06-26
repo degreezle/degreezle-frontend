@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { InstructionsModalComponent } from '../instructions-modal/instructions-modal.component';
 import { PuzzleComponent } from '../puzzle/puzzle.component';
 import { LocalStorageService } from '../services/local-storage.service';
+import { DonationModalComponent } from '../donation-modal/donation-modal.component';
 
 @Component({
   selector: 'app-puzzle-page',
@@ -31,11 +32,21 @@ export class PuzzlePageComponent implements OnInit {
     if (!this.localStorageService.hasSeenInstructions) {
       this.showInstructions();
       this.localStorageService.setSeenInstructions();
+    } else {
+      this.askForDonation();
     }
   }
 
   showInstructions() {
     this.dialog.open(InstructionsModalComponent, {
+      backdropClass: 'modal-backdrop',
+      closeOnNavigation: true,
+      maxWidth: 500,
+    });
+  }
+
+  askForDonation() {
+    this.dialog.open(DonationModalComponent, {
       backdropClass: 'modal-backdrop',
       closeOnNavigation: true,
       maxWidth: 500,
