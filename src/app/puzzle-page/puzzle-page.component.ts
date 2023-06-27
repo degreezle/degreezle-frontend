@@ -31,8 +31,9 @@ export class PuzzlePageComponent implements OnInit {
     if (!this.localStorageService.hasSeenInstructions) {
       this.showInstructions();
       this.localStorageService.setSeenInstructions();
-    } else {
+    } else if (!this.localStorageService.hasSeenDonationPopUp) {
       this.askForDonation();
+      this.localStorageService.setSeenDonationPopUp();
     }
   }
 
