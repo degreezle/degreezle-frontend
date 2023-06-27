@@ -22,6 +22,8 @@ import { PuzzlePageComponent } from './puzzle-page/puzzle-page.component';
 import { MovieDisplayComponent } from './movie-display/movie-display.component';
 import { CastMemberDisplayComponent } from './cast-member-display/cast-member-display.component';
 import { InstructionsModalComponent } from './instructions-modal/instructions-modal.component';
+import { DonationModalComponent } from './donation-modal/donation-modal.component';
+
 import { OurDataPageComponent } from './our-data-page/our-data-page.component';
 import { SolutionMetricsModalComponent } from './solution-metrics-modal/solution-metrics-modal.component';
 import { GTM_ID } from 'src/constants';
@@ -37,6 +39,7 @@ import { RedirectComponent } from './redirect/redirect.component';
     MovieDisplayComponent,
     CastMemberDisplayComponent,
     InstructionsModalComponent,
+    DonationModalComponent,
     OurDataPageComponent,
     SolutionMetricsModalComponent,
     RedirectComponent,
@@ -46,16 +49,16 @@ import { RedirectComponent } from './redirect/redirect.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule, 
+    HttpClientModule,
     BrowserAnimationsModule,
     MatTabsModule,
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule, 
-    MatButtonModule, 
+    MatIconModule,
+    MatButtonModule,
     MatDialogModule,
-    MatToolbarModule, 
+    MatToolbarModule,
     SwiperModule,
     GoogleTagManagerModule.forRoot({
       id: GTM_ID,
