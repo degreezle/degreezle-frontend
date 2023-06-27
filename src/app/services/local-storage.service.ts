@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SolutionResponse, StartPuzzle, StorageV1_0_0 } from 'src/models';
+import { SolutionResponse, StartPuzzle, StorageV1_0_1 } from 'src/models';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class LocalStorageService {
     return data && 'version' in data && data['version'] === this.version;
   }
 
-  getData(): StorageV1_0_0 {
+  getData(): StorageV1_0_1 {
     let data = localStorage.getItem('data');
     return data ? JSON.parse(data) : {};
   }
@@ -30,11 +30,11 @@ export class LocalStorageService {
   }
 
   creataData() {
-    let data: StorageV1_0_0 = { version: this.version };
+    let data: StorageV1_0_1 = { version: this.version };
     localStorage.setItem('data', JSON.stringify(data));
   }
 
-  setData(key: keyof StorageV1_0_0, value: any) {
+  setData(key: keyof StorageV1_0_1, value: any) {
     let data: any = this.getData();
     data[key] = value;
     localStorage.setItem('data', JSON.stringify(data));
@@ -42,12 +42,22 @@ export class LocalStorageService {
 
   public get hasSeenInstructions() {
     this.checkVersion();
-    let data: StorageV1_0_0 = this.getData();
+    let data: StorageV1_0_1 = this.getData();
     return Boolean(data.seen_instructions);
+  }
+
+  public get hasSeenDonationPopUp() {
+    this.checkVersion();
+    let data: StorageV1_0_1 = this.getData();
+    return Boolean(data.seen_donation_pop_up);
   }
 
   public setSeenInstructions() {
     this.setData('seen_instructions', true);
+  }
+
+  public setSeenDonationPopUp() {
+    this.setData('seen_donation_pop_up', true);
   }
 
   public addSolution(puzzle: StartPuzzle, solution: SolutionResponse) {

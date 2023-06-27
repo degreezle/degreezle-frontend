@@ -67,6 +67,21 @@ export interface SolutionMetrics {
 }
 
 /**
+ * Storage model V1.0.1
+ */
+export interface StorageV1_0_1 {
+  seen_instructions?: boolean;
+  seen_donation_pop_up?: boolean;
+  solutions?: {
+    [puzzleId: number]: StorageSolutionV1_0_0;
+  };
+  current_streak?: number;
+  max_streak?: number;
+  last_solution_date?: string;
+  version: string;
+}
+
+/**
  * Storage model V1.0.0
  */
 export interface StorageV1_0_0 {
