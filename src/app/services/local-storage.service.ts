@@ -107,6 +107,10 @@ export class LocalStorageService {
     return Boolean(this.solutions[puzzleId]);
   }
 
+  public isOwnToken(puzzleId: number, token: string | null) {
+    return this.solutions[puzzleId].token === token;
+  }
+
   public getSolution(puzzleId: number) {
     return this.solutions[puzzleId];
   }

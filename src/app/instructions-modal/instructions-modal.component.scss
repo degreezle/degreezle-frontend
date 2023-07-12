@@ -1,10 +1,15 @@
 .example-solution{
   font-size: 16px;
+  margin-bottom: 0px;
   img {
     width: 98%;
     margin-bottom: 10px;
     display: block;
   }
+}
+
+a {
+  color:#0172D5;
 }
 
 h2 {
@@ -19,5 +24,5 @@ p {
   font-size: 22px;
   line-height: normal;
   // font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  margin: 0px 10px 20px 10px;
+  margin: 0px 10px 20px 0px;
 }

@@ -2,6 +2,16 @@
     flex: 1 1 auto;
 }
 
+.logo {
+  padding: 5px 0;
+  max-height: 45px;
+  margin-top: 7px;
+
+  @media only screen and (max-width: 600px) {
+    max-height: 35px;
+  }
+}
+
 .nav-bar {
     position: fixed;
     z-index: 1;
@@ -25,7 +35,6 @@
   }
 
   @media only screen and (max-width: 600px) {
-    max-width: 35px;
     text-align: center;
 
     .counter {

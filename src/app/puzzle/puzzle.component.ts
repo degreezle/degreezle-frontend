@@ -43,14 +43,16 @@ export class PuzzleComponent implements OnChanges {
         if (puzzle.id) {
           this.puzzle = puzzle;
 
-          if (this.localStorageService.hasSolved(puzzle.id)) {
-            this.solvedPuzzle.emit(true);
+          if (!this.token && this.localStorageService.hasSolved(puzzle.id)) {
             this.token = this.localStorageService.getSolution(puzzle.id).token;
-          }
+          } 
+        }
+
+        if (this.localStorageService.hasSolved(puzzle.id) && this.localStorageService.isOwnToken(puzzle.id, this.token)) {
+          this.solvedPuzzle.emit(true);
         }
 
         if (this.token) {
-          this.solvedPuzzle.emit(true);
           this.loadSolution(this.token);
         } else if (puzzle.id) {
           this.loadGameInfo(puzzle)
@@ -93,6 +95,7 @@ export class PuzzleComponent implements OnChanges {
     this.puzzleService.getSolution(token).subscribe(
       solution => {
         this.loadedSolution = solution.solution;
+        this.puzzleService.getStartPuzzle(solution.puzzle);
         this.loading = false;
       },
       () => {
@@ -100,15 +103,17 @@ export class PuzzleComponent implements OnChanges {
         this.loading = false;
       }
     )
-    this.puzzleService.getSolutionMetrics(token).subscribe(
-      solutionMetrics => {
-        this.solutionMetrics = solutionMetrics;
-      },
-      () => {
-        this.error = true;
-        this.loading = false;
-      }
-    );
+    if (this.solutionMetrics?.token !== token) {
+      this.puzzleService.getSolutionMetrics(token).subscribe(
+        solutionMetrics => {
+          this.solutionMetrics = solutionMetrics;
+        },
+        () => {
+          this.error = true;
+          this.loading = false;
+        }
+      );
+    }
   }
 
   async add(id: number) {
@@ -181,7 +186,7 @@ export class PuzzleComponent implements OnChanges {
   }
 
   hasFoundSolution() {
-    return this.puzzleSequence.length > 0 && this.possibleEndings.includes(this.puzzleSequence[this.puzzleSequence.length - 1])
+    return this.puzzleSequence.length > 0 && this.possibleEndings.includes(this.puzzleSequence[this.puzzleSequence.length - 1]) && this.puzzleSequence.length % 2 === 0;
   }
 
   showMovieSelector(index: number) {

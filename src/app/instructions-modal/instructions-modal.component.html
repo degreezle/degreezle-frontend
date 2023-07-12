@@ -1,7 +1,6 @@
 <mat-dialog-content>
-  <p><strong>film in the gaps:</strong> link two films in as few steps as possible.</p>
-  <p>select a cast or crew member from the first film, then select a film from that person's filmography.</p>
-  <p>repeat until you reach the last film.</p>
+  <p><strong>film in the gaps:</strong><br>link two films in as few steps as possible. each puzzle has a solution of six or fewer steps.</p>
+  <p>select a cast or crew member from the first film, then select a film from that person's filmography. repeat until you reach the last film.</p>
   <p class="example-solution">
     <img class="example-solution" src="assets/examplesolution.png">
     e.g. <strong>Spider-Man: Far From Home</strong> stars <strong>Jake Gyllenhaal</strong> who plays Jack Twist
@@ -9,9 +8,6 @@
     <strong>Hulk</strong> which stars <strong>Jennifer Connelly</strong> who appears in 
     <strong>Spider-Man: Homecoming</strong>!
   </p>
-  <p>each puzzle has a solution of six or fewer steps.</p>
-  <p>if you need more context about a film or person click to see their details on TMDB.</p>
-  
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-stroked-button class="primary" aria-label="understood instructions" [mat-dialog-close]="true" cdkFocusInitial>
@@ -22,3 +18,6 @@
     about our data
   </button> -->
 </mat-dialog-actions>
+<mat-dialog-content>
+  <p class="example-solution">contact us <a href="https://twitter.com/filminthegaps">@filminthegaps</a></p>
+</mat-dialog-content>
