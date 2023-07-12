@@ -5,6 +5,10 @@ import { InstructionsModalComponent } from '../instructions-modal/instructions-m
 import { PuzzleComponent } from '../puzzle/puzzle.component';
 import { LocalStorageService } from '../services/local-storage.service';
 import { DonationModalComponent } from '../donation-modal/donation-modal.component';
+import { DateFilterFn, MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { PuzzleService } from '../services/puzzle-service.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { HistoricalPuzzle } from 'src/models';
 
 @Component({
   selector: 'app-puzzle-page',
@@ -18,13 +22,14 @@ export class PuzzlePageComponent implements OnInit {
   solved = false;
   darkMode = false;
   stepCount = 1;
+  historicalPuzzles: HistoricalPuzzle[] = [{ id: 1, datetime: '2023-07-05' }];
 
   @ViewChild(PuzzleComponent) puzzle: PuzzleComponent | undefined;
 
 
-  constructor(public route: ActivatedRoute, public dialog: MatDialog, public localStorageService: LocalStorageService) { }
+  constructor(public route: ActivatedRoute, public dialog: MatDialog, public puzzleService: PuzzleService, public localStorageService: LocalStorageService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe(paramMap => {
       this.token = paramMap.get('token');
       this.puzzleId = paramMap.get('puzzleId');
@@ -36,6 +41,7 @@ export class PuzzlePageComponent implements OnInit {
       this.askForDonation();
       this.localStorageService.setSeenDonationPopUp();
     }
+    this.historicalPuzzles = await this.puzzleService.getHistoricalPuzzles().toPromise();
   }
 
   showInstructions() {
@@ -67,5 +73,38 @@ export class PuzzlePageComponent implements OnInit {
   showSolutionMetrics() {
     this.puzzle?.showSolutionMetrics();
   }
+
+  selectPuzzle(dateRef: string) {
+    const clickedPuzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).getDate() === new Date(dateRef).getDate())
+    if (clickedPuzzle) {
+      window.open(`https://filminthega.ps/archive/${clickedPuzzle.id}`, '_blank');
+    }
+  }
+
+  dateFilter: DateFilterFn<Date | null> = (date: Date | null) => {
+    if (date) {
+      return this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).getDate()).includes(date.getDate());
+    }
+    return false;
+  };
+
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    // Only highligh dates inside the month view.
+    if (view === 'month') {
+      // Highlight if it is a historical puzzle
+      var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).getDate()).includes(cellDate.getDate());
+      const puzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).getDate() === cellDate.getDate())
+      // And if they have been solved in this client
+      if (puzzle) {
+        highlight = highlight && Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
+      } else {
+        highlight = false
+      }
+
+      return highlight ? 'solved-puzzle' : '';
+    }
+
+    return '';
+  };
 
 }

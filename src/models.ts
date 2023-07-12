@@ -27,6 +27,14 @@ export interface StartPuzzle {
 }
 
 /**
+ * Historical puzzle model
+ */
+export interface HistoricalPuzzle {
+  id: number;
+  datetime: string;
+}
+
+/**
  * SolutionResponse model
  */
 export interface SolutionResponse {

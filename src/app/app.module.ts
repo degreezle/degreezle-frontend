@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SwiperModule } from 'swiper/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { CastMemberSelectorComponent } from './cast-member-selector/cast-member-selector.component';
@@ -28,6 +29,7 @@ import { OurDataPageComponent } from './our-data-page/our-data-page.component';
 import { SolutionMetricsModalComponent } from './solution-metrics-modal/solution-metrics-modal.component';
 import { GTM_ID } from 'src/constants';
 import { RedirectComponent } from './redirect/redirect.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { RedirectComponent } from './redirect/redirect.component';
     MatButtonModule,
     MatDialogModule,
     MatToolbarModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
     SwiperModule,
     GoogleTagManagerModule.forRoot({
       id: GTM_ID,

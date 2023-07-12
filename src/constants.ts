@@ -6,6 +6,7 @@ export const HOST = 'https://api.filminthega.ps'
 
 export const ENDPOINTS = {
   puzzle: prefix + 'puzzle/',
+  historicalPuzzles: prefix + 'puzzle/historical/',
   movie: prefix + 'movie/',
   person: prefix + 'person/',
   solution: prefix + 'solution/',
