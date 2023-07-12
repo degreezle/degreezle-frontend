@@ -75,7 +75,7 @@ export class PuzzlePageComponent implements OnInit {
   }
 
   selectPuzzle(dateRef: string) {
-    const clickedPuzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).getDate() === new Date(dateRef).getDate())
+    const clickedPuzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).toDateString() === new Date(dateRef).toDateString())
     if (clickedPuzzle) {
       window.open(`https://filminthega.ps/archive/${clickedPuzzle.id}`, '_blank');
     }
@@ -83,7 +83,7 @@ export class PuzzlePageComponent implements OnInit {
 
   dateFilter: DateFilterFn<Date | null> = (date: Date | null) => {
     if (date) {
-      return this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).getDate()).includes(date.getDate());
+      return this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).toDateString()).includes(date.toDateString());
     }
     return false;
   };
@@ -92,8 +92,8 @@ export class PuzzlePageComponent implements OnInit {
     // Only highligh dates inside the month view.
     if (view === 'month') {
       // Highlight if it is a historical puzzle
-      var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).getDate()).includes(cellDate.getDate());
-      const puzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).getDate() === cellDate.getDate())
+      var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).toDateString()).includes(cellDate.toDateString());
+      const puzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).toDateString() === cellDate.toDateString())
       // And if they have been solved in this client
       if (puzzle) {
         highlight = highlight && Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
