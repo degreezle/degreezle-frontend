@@ -71,7 +71,16 @@ body { margin: 0; font-family: "Helvetica Neue", sans-serif; }
  background-color: #D52A9F !important;
 }
 
-.solved-puzzle {
+.solved-puzzle:after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  transform: translate(30%,-30%) scale(0.1, 0.1);
+  border-radius: 50%;
   background: #D52A9F;
-  border-radius: 100%;
+  mix-blend-mode:darken;
 }
+
+
+

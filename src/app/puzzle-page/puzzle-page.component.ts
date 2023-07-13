@@ -7,7 +7,6 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { DonationModalComponent } from '../donation-modal/donation-modal.component';
 import { DateFilterFn, MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { PuzzleService } from '../services/puzzle-service.service';
-import { Observable } from 'rxjs/internal/Observable';
 import { HistoricalPuzzle } from 'src/models';
 
 @Component({
@@ -22,7 +21,7 @@ export class PuzzlePageComponent implements OnInit {
   solved = false;
   darkMode = false;
   stepCount = 1;
-  historicalPuzzles: HistoricalPuzzle[] = [{ id: 1, datetime: '2023-07-05' }];
+  historicalPuzzles: HistoricalPuzzle[] = [];
 
   @ViewChild(PuzzleComponent) puzzle: PuzzleComponent | undefined;
 
@@ -97,6 +96,37 @@ export class PuzzlePageComponent implements OnInit {
       // And if they have been solved in this client
       if (puzzle) {
         highlight = highlight && Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
+      } else {
+        highlight = false
+      }
+
+      return highlight ? 'solved-puzzle' : '';
+    }
+
+    else if (view === 'multi-year') {
+      // Highlight if it is a historical puzzle
+      var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).getFullYear()).includes(cellDate.getFullYear());
+      const puzzles = this.historicalPuzzles.filter(puzzle => new Date(puzzle.datetime).getFullYear() === cellDate.getFullYear())
+      // And if they have been solved in this client
+      if (puzzles.length) {
+        highlight = highlight && puzzles.some(puzzle => Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id))
+      } else {
+        highlight = false
+      }
+
+      return highlight ? 'solved-puzzle' : '';
+    }
+
+    else if (view === 'year') {
+      // Highlight if it is a historical puzzle
+      var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).toDateString().slice(4, 7) + new Date(puzzle.datetime).toDateString().slice(11)).includes(cellDate.toDateString().slice(4, 7) + cellDate.toDateString().slice(11));
+      const puzzles = this.historicalPuzzles.filter(puzzle => new Date(puzzle.datetime).toDateString().slice(4, 7) + new Date(puzzle.datetime).toDateString().slice(11) === cellDate.toDateString().slice(4, 7) + cellDate.toDateString().slice(11))
+      // And if they have been solved in this client
+      if (puzzles.length) {
+        highlight = highlight && puzzles.some(puzzle => {
+          return Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
+
+        })
       } else {
         highlight = false
       }
