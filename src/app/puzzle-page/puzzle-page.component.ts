@@ -109,7 +109,7 @@ export class PuzzlePageComponent implements OnInit {
       const puzzles = this.historicalPuzzles.filter(puzzle => new Date(puzzle.datetime).getFullYear() === cellDate.getFullYear())
       // And if they have been solved in this client
       if (puzzles.length) {
-        highlight = highlight && !puzzles.some(puzzle => Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id))
+        highlight = highlight && puzzles.every(puzzle => !Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id))
       } else {
         highlight = false
       }
@@ -123,8 +123,8 @@ export class PuzzlePageComponent implements OnInit {
       const puzzles = this.historicalPuzzles.filter(puzzle => new Date(puzzle.datetime).toDateString().slice(4, 7) + new Date(puzzle.datetime).toDateString().slice(11) === cellDate.toDateString().slice(4, 7) + cellDate.toDateString().slice(11))
       // And if they have been solved in this client
       if (puzzles.length) {
-        highlight = highlight && !puzzles.some(puzzle => {
-          return Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
+        highlight = highlight && puzzles.every(puzzle => {
+          return !Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
 
         })
       } else {
