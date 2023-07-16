@@ -93,7 +93,7 @@ export class PuzzlePageComponent implements OnInit {
       // Highlight if it is a historical puzzle
       var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).toDateString()).includes(cellDate.toDateString());
       const puzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).toDateString() === cellDate.toDateString())
-      // And if they have been solved in this client
+      // And if they have not been solved in this client
       if (puzzle) {
         highlight = highlight && !Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
       } else {
@@ -107,7 +107,7 @@ export class PuzzlePageComponent implements OnInit {
       // Highlight if it is a historical puzzle
       var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).getFullYear()).includes(cellDate.getFullYear());
       const puzzles = this.historicalPuzzles.filter(puzzle => new Date(puzzle.datetime).getFullYear() === cellDate.getFullYear())
-      // And if they have been solved in this client
+      // And if they have not been solved in this client
       if (puzzles.length) {
         highlight = highlight && puzzles.some(puzzle => !Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id))
       } else {
@@ -121,7 +121,7 @@ export class PuzzlePageComponent implements OnInit {
       // Highlight if it is a historical puzzle
       var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).toDateString().slice(4, 7) + new Date(puzzle.datetime).toDateString().slice(11)).includes(cellDate.toDateString().slice(4, 7) + cellDate.toDateString().slice(11));
       const puzzles = this.historicalPuzzles.filter(puzzle => new Date(puzzle.datetime).toDateString().slice(4, 7) + new Date(puzzle.datetime).toDateString().slice(11) === cellDate.toDateString().slice(4, 7) + cellDate.toDateString().slice(11))
-      // And if they have been solved in this client
+      // And if they have not been solved in this client
       if (puzzles.length) {
         highlight = highlight && puzzles.some(puzzle => {
           return !Object.keys(this.localStorageService.solutions).map(id => Number(id)).includes(puzzle.id)
