@@ -126,7 +126,7 @@ export class PuzzleComponent implements OnChanges {
 
   async postSolutionAndShowModal() {
     if (this.solved && this.puzzle) {
-      this.solvedPuzzle.emit(true);
+      this.solvedPuzzle.emit();
       await this.postSolutionAndGetMetrics();
       this.calculateAndStoreSolutionMetrics();
       this.showSolutionMetrics();
