@@ -27,10 +27,8 @@ export class PuzzlePageComponent implements OnInit {
   @ViewChild(PuzzleComponent) puzzle: PuzzleComponent | undefined;
 
   get puzzleDate(): Date | null {
-    console.log(this.solvedPuzzle, this.puzzleId, 'anyyyy')
     const puzzle = this.historicalPuzzles.find(puzzle => puzzle.id === (this.solvedPuzzle ?? Number(this.puzzleId)));
     if (puzzle) {
-      console.log('yesss', new Date(puzzle.datetime))
       return new Date(puzzle.datetime)
     }
     return null;
