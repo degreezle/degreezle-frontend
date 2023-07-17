@@ -27,7 +27,7 @@ export class PuzzleComponent implements OnChanges {
   error = false;
   @ViewChild('afterEndMovie') public afterEndMovie: ElementRef | undefined;
   @Output() stepCountChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Output() solvedPuzzle: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() solvedPuzzle: EventEmitter<Number> = new EventEmitter<Number>();
 
 
   constructor(
@@ -49,7 +49,7 @@ export class PuzzleComponent implements OnChanges {
         }
 
         if (this.localStorageService.hasSolved(puzzle.id) && this.localStorageService.isOwnToken(puzzle.id, this.token)) {
-          this.solvedPuzzle.emit(true);
+          this.solvedPuzzle.emit(puzzle.id);
         }
 
         if (this.token) {
@@ -126,7 +126,7 @@ export class PuzzleComponent implements OnChanges {
 
   async postSolutionAndShowModal() {
     if (this.solved && this.puzzle) {
-      this.solvedPuzzle.emit(true);
+      this.solvedPuzzle.emit();
       await this.postSolutionAndGetMetrics();
       this.calculateAndStoreSolutionMetrics();
       this.showSolutionMetrics();

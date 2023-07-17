@@ -5,6 +5,24 @@
     <!-- <button mat-icon-button aria-label="Dark/light mode" (click)="darkMode = !darkMode">
       <mat-icon>lightbulb_outline</mat-icon>
     </button> -->
+    <mat-form-field class="no">
+      <input
+        matInput
+        #dateRef
+        [matDatepicker]="picker"
+        [matDatepickerFilter]="dateFilter"
+        (dateChange)="selectPuzzle(dateRef.value)"
+      />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker [dateClass]="dateClass" [startAt]="puzzleDate"></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-icon-button aria-label="Show previous puzzles" (click)="picker.open()">
+      <span class="material-symbols-outlined">
+        calendar_today
+      </span>
+    </button>
+
     <button *ngIf="solved" mat-icon-button aria-label="Show solution metrics" (click)="showSolutionMetrics()">
       <span class="material-symbols-outlined">
         monitoring
@@ -36,6 +54,6 @@
 
 <div class="center-puzzle" [class.dark-mode]="darkMode">
   <div class="bar-spacer"></div>
-  <app-puzzle [token]="token" [puzzleId]="puzzleId" (stepCountChanged)="stepCount = $event" (solvedPuzzle)="solved=true"></app-puzzle>
+  <app-puzzle [token]="token" [puzzleId]="puzzleId" (stepCountChanged)="stepCount = $event" (solvedPuzzle)="solved=true;solvedPuzzle=$event"></app-puzzle>
   <div class="bar-spacer"></div>
 </div>
