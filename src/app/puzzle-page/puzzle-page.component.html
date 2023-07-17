@@ -14,7 +14,7 @@
         (dateChange)="selectPuzzle(dateRef.value)"
       />
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker touchUi #picker [dateClass]="dateClass"></mat-datepicker>
+      <mat-datepicker touchUi #picker [dateClass]="dateClass" [startAt]="puzzleDate"></mat-datepicker>
     </mat-form-field>
 
     <button mat-icon-button aria-label="Show previous puzzles" (click)="picker.open()">
@@ -54,6 +54,6 @@
 
 <div class="center-puzzle" [class.dark-mode]="darkMode">
   <div class="bar-spacer"></div>
-  <app-puzzle [token]="token" [puzzleId]="puzzleId" (stepCountChanged)="stepCount = $event" (solvedPuzzle)="solved=true"></app-puzzle>
+  <app-puzzle [token]="token" [puzzleId]="puzzleId" (stepCountChanged)="stepCount = $event" (solvedPuzzle)="solved=true;solvedPuzzle=$event"></app-puzzle>
   <div class="bar-spacer"></div>
 </div>

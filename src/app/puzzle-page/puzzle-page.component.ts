@@ -18,12 +18,21 @@ export class PuzzlePageComponent implements OnInit {
 
   token: string | null = null;
   puzzleId: string | null = null;
+  solvedPuzzle: Number | null = null;
   solved = false;
   darkMode = false;
   stepCount = 1;
   historicalPuzzles: HistoricalPuzzle[] = [];
 
   @ViewChild(PuzzleComponent) puzzle: PuzzleComponent | undefined;
+
+  get puzzleDate(): Date | null {
+    const puzzle = this.historicalPuzzles.find(puzzle => puzzle.id === this.solvedPuzzle);
+    if (puzzle) {
+      return new Date(puzzle.datetime)
+    }
+    return null;
+  }
 
 
   constructor(public route: ActivatedRoute, public dialog: MatDialog, public puzzleService: PuzzleService, public localStorageService: LocalStorageService) { }
