@@ -17,6 +17,7 @@ export class PuzzleComponent implements OnChanges {
   @Input() token: string | null = null;
   @Input() puzzleId: string | null = null;
   puzzle: StartPuzzle | null = null;
+  puzzleAuthor: string | undefined;
   puzzleSequence: number[] = [];
   possibleEndings: number[] = [];
   solved = false;
@@ -78,6 +79,7 @@ export class PuzzleComponent implements OnChanges {
   }
 
   loadGameInfo(puzzle: StartPuzzle) {
+    this.puzzleAuthor = puzzle.author;
     this.puzzleSequence = [puzzle.start_movie.id];
     this.puzzleService.getMovieCrew(puzzle.end_movie.id).subscribe(
       (movies: CastMember[]) => {

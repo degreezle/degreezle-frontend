@@ -1,7 +1,8 @@
 
 <div class="game-wrapper">
     <div *ngIf="loading"><img src="assets/loading.gif"></div>
-    <div *ngIf="!loading && error">Something went wrong :( Please reload.</div>
+    <div *ngIf="!loading && error">Something went wrong! :( Please reload.</div>
+    <div *ngIf="!loading && !error && puzzleAuthor" class="author">✍️ puzzle by {{ puzzleAuthor }}</div>
     <div *ngIf="!loading && !token" class="game">
         <app-movie-display [item]="puzzle?.start_movie"></app-movie-display>
         <div *ngFor="let id of puzzleSequence; let i = index"> 
