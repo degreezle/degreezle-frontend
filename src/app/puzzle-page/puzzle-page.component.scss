@@ -55,10 +55,6 @@
   height: fit-content;
   background-color: #f0f0f0;
 
-  @media only screen and (max-width: 600px) {
-    min-height: unset;
-  }
-
   &.dark-mode {
       background-color: #363333;
   }

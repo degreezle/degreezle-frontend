@@ -14,20 +14,26 @@
         margin-right: 0px;
     }
 
-    .author {
-        width: 66%;
-        margin-left: 10px;
-    }
 }
 
 .game-wrapper {
     margin-top: 75px;
     display: inline-block;
     overflow: auto;
+
+    &.hasAuthor {
+        margin-top: 120px;
+    }
 }
 
 .author {
-    margin-bottom: 20px;
-    margin-left: 20px;
-    font-size: 18px;
+    font-size: 12px;
+    position: absolute;
+    top: 75px;
+    left: 25px;
+
+    @media only screen and (max-width: 600px) {
+        top: 65px;
+        left: 20px;
+    }
 }
