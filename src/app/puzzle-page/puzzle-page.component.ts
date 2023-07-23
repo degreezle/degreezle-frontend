@@ -45,9 +45,6 @@ export class PuzzlePageComponent implements OnInit {
     if (!this.localStorageService.hasSeenInstructions) {
       this.showInstructions();
       this.localStorageService.setSeenInstructions();
-    } else if (!this.localStorageService.hasSeenDonationPopUp) {
-      this.askForDonation();
-      this.localStorageService.setSeenDonationPopUp();
     }
     this.historicalPuzzles = await this.puzzleService.getHistoricalPuzzles().toPromise();
   }
