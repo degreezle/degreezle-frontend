@@ -85,7 +85,7 @@ export class PuzzlePageComponent implements OnInit {
   selectPuzzle(dateRef: string) {
     const clickedPuzzle = this.historicalPuzzles.find(puzzle => new Date(puzzle.datetime).toDateString() === new Date(dateRef).toDateString())
     if (clickedPuzzle) {
-      window.open(`/archive/${clickedPuzzle.id}`);
+      window.open(`/archive/${clickedPuzzle.id}`, "_self");
     }
   }
 
