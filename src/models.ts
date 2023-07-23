@@ -24,6 +24,7 @@ export interface StartPuzzle {
   start_movie: Movie;
   end_movie: Movie;
   local_datetime?: string;
+  author?: string;
 }
 
 /**

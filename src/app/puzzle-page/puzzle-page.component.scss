@@ -1,5 +1,5 @@
 .bar-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .logo {
@@ -13,9 +13,9 @@
 }
 
 .nav-bar {
-    position: fixed;
-    z-index: 1;
-    width: 100%;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 }
 
 .second-menu {
@@ -38,27 +38,26 @@
     text-align: center;
 
     .counter {
-      padding-bottom: 10px 0;
+      padding-bottom: 10px;
       font-size: 16px;
     }
   }
-
 }
 
 .center-puzzle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    min-height: 100%;
-    min-width: 100%;
-    width: fit-content;
-    height: fit-content;
-    background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  min-height: 100%;
+  min-width: 100%;
+  width: fit-content;
+  height: fit-content;
+  background-color: #f0f0f0;
 
-    &.dark-mode {
-        background-color: #363333;
-    }
+  &.dark-mode {
+      background-color: #363333;
+  }
 }
 
 .no {

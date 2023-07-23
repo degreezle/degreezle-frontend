@@ -94,7 +94,7 @@ export class PuzzlePageComponent implements OnInit {
   };
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-    // Only highligh dates inside the month view.
+    // Only highlight dates inside the month view.
     if (view === 'month') {
       // Highlight if it is a historical puzzle
       var highlight: boolean = this.historicalPuzzles.map((puzzle) => new Date(puzzle.datetime).toDateString()).includes(cellDate.toDateString());
